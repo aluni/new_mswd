@@ -1,13 +1,14 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller\REST;
 
-use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\Collection;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\View;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Controlador encargado del servicio REST de sorteos de s. Usa funcionalidades del FOSRestBundle (creación de 
@@ -18,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @copyright ALUNI MADRID S.L.
  * @Route("/sorteos")
  */
-class SorteosRESTController extends FOSRestController {
+class SorteosRESTController extends AluniRESTController {
 
     /**
      * @View(serializerGroups={"lista-sorteos"})
@@ -58,7 +59,7 @@ class SorteosRESTController extends FOSRestController {
      * @return Response
      */
     public function postSorteoAction(Request $request) {
-        $sorteo = $this->get('jms_serializer')->deserialize($request->getContent(), 'SWD\MadridBundle\Entity\Sorteo', 'json');
+        $sorteo = $this->get('jms_serializer')->deserialize($request->getContent(), 'App\Entity\Sorteo', 'json');
         $em = $this->getDoctrine()->getManager();
         $em->persist($sorteo);
         foreach ($sorteo->getParticipantes() as $participante) {
@@ -78,7 +79,7 @@ class SorteosRESTController extends FOSRestController {
      */
     public function putSorteoAction(Request $request, $id) {
         $sorteo = $this->get('jms_serializer')->deserialize(
-                $request->getContent(), 'SWD\MadridBundle\Entity\Sorteo', 'json');
+                $request->getContent(), 'App\Entity\Sorteo', 'json');
         $em = $this->getDoctrine()->getManager();
         $em->persist($sorteo);
         $em->flush();

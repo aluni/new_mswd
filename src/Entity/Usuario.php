@@ -1,7 +1,7 @@
 <?php
 // src/AppBundle/Entity/User.php
 
-namespace SWD\MadridBundle\Entity;
+namespace App\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,9 +14,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\DiscriminatorColumn(name="tipo", type="string")
  * @ORM\DiscriminatorMap({"usuario" = "Usuario", "participante" = "Participante", "institucion" = "Institucion"})
  * @Serializer\Discriminator(field = "tipo", disabled = false, map = {
- *      "usuario": "SWD\MadridBundle\Entity\Usuario", 
- *      "participante": "SWD\MadridBundle\Entity\Participante", 
- *      "institucion": "SWD\MadridBundle\Entity\Institucion"
+ *      "usuario": "App\Entity\Usuario", 
+ *      "participante": "App\Entity\Participante", 
+ *      "institucion": "App\Entity\Institucion"
  * })
  */
 class Usuario extends BaseUser

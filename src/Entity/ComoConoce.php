@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

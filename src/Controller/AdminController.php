@@ -1,14 +1,13 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use SWD\MadridBundle\Form\ParticipanteFiltrosType;
-use SWD\MadridBundle\Form\SorteoType;
+use App\Form\ParticipanteFiltrosType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Serializer;
@@ -19,7 +18,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
  */
-class AdminController extends Controller {
+class AdminController extends AluniController {
 
     /**
      * @return Response

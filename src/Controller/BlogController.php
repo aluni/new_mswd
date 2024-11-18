@@ -1,9 +1,9 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
  */
-class BlogController extends Controller {
+class BlogController extends AluniController {
 
     /**
      * @return Response

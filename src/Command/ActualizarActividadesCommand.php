@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Command;
+namespace App\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
  */
-class ActualizarActividadesCommand extends ContainerAwareCommand {
+class ActualizarActividadesCommand extends AluniCommand {
 
     /**
      * El comando recibe un argumento que es opcional(fecha), en caso de que este argumento no se

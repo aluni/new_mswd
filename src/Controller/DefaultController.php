@@ -1,11 +1,11 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Google_Service_Gmail;
@@ -13,7 +13,7 @@ use Google_Service_Gmail_Message;
 use Swift_Message;
 use Swift_Attachment;
 
-class DefaultController extends Controller {
+class DefaultController extends AluniController {
 
     /**
      * @Route("/students", name="home")

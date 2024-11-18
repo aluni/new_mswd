@@ -2,14 +2,14 @@
 
 //
 
-namespace SWD\MadridBundle\Command;
+namespace App\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use SWD\MadridBundle\Entity\Institucion;
+use App\Entity\Institucion;
 
 /**
  * Actualiza los entrada de actividades desde Blogger. Este comando hace una petición HTTP a la API
@@ -20,7 +20,7 @@ use SWD\MadridBundle\Entity\Institucion;
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
  */
-class ActualizarInstitucionesCommand extends ContainerAwareCommand {
+class ActualizarInstitucionesCommand extends AluniCommand {
 
     /**
      * El comando recibe un argumento que es opcional(fecha), en caso de que este argumento no se

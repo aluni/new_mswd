@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Utils;
+namespace App\Services;
 
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;

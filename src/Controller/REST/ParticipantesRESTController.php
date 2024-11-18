@@ -1,13 +1,14 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller\REST;
 
-use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\Collection;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\View;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Controlador encargado del servicio REST de participantes de s. Usa funcionalidades del FOSRestBundle (creación de 
@@ -18,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @copyright ALUNI MADRID S.L.
  * @Route("/participantes")
  */
-class ParticipantesRESTController extends FOSRestController {
+class ParticipantesRESTController extends AluniRESTController {
 
     /**
      * @View(serializerGroups={"lista-participantes"})
@@ -60,7 +61,7 @@ class ParticipantesRESTController extends FOSRestController {
     public function putParticipanteAction(Request $request, $id) {
         $participante = $this->get('jms_serializer')->deserialize(
                 $request->getContent(), 
-                'SWD\MadridBundle\Entity\Participante', 
+                'App\Entity\Participante', 
                 'json');
         $em = $this->getDoctrine()->getManager();
         $em->persist($participante);

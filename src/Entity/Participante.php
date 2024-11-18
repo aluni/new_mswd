@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
@@ -96,14 +96,14 @@ class Participante extends Usuario {
 
     /**
      * @ORM\ManyToMany(targetEntity="Sorteo", inversedBy="participantes", cascade={"persist"})
-     * @Serializer\Type("ArrayCollection<SWD\MadridBundle\Entity\Sorteo>")
+     * @Serializer\Type("ArrayCollection<App\Entity\Sorteo>")
      * @Serializer\Groups({"lista-participantes"})
      */
     private $sorteos;
 
     /**
      * @ORM\OneToMany(targetEntity="Checkeo", mappedBy="participante", cascade={"persist"}) 
-     * @Serializer\Type("ArrayCollection<SWD\MadridBundle\Entity\Checkeo>")
+     * @Serializer\Type("ArrayCollection<App\Entity\Checkeo>")
      * @Serializer\Groups({"lista-participantes"})
      */
     private $checkeos;
@@ -309,11 +309,11 @@ class Participante extends Usuario {
     /**
      * Add sorteo
      *
-     * @param \SWD\MadridBundle\Entity\Sorteo $sorteo
+     * @param \App\Entity\Sorteo $sorteo
      *
      * @return Participante
      */
-    public function addSorteo(\SWD\MadridBundle\Entity\Sorteo $sorteo)
+    public function addSorteo(\App\Entity\Sorteo $sorteo)
     {
         $this->sorteos[] = $sorteo;
 
@@ -323,9 +323,9 @@ class Participante extends Usuario {
     /**
      * Remove sorteo
      *
-     * @param \SWD\MadridBundle\Entity\Sorteo $sorteo
+     * @param \App\Entity\Sorteo $sorteo
      */
-    public function removeSorteo(\SWD\MadridBundle\Entity\Sorteo $sorteo)
+    public function removeSorteo(\App\Entity\Sorteo $sorteo)
     {
         $this->sorteos->removeElement($sorteo);
     }
@@ -343,11 +343,11 @@ class Participante extends Usuario {
     /**
      * Add checkeo
      *
-     * @param \SWD\MadridBundle\Entity\Checkeo $checkeo
+     * @param \App\Entity\Checkeo $checkeo
      *
      * @return Participante
      */
-    public function addCheckeo(\SWD\MadridBundle\Entity\Checkeo $checkeo)
+    public function addCheckeo(\App\Entity\Checkeo $checkeo)
     {
         $this->checkeos[] = $checkeo;
 
@@ -357,9 +357,9 @@ class Participante extends Usuario {
     /**
      * Remove checkeo
      *
-     * @param \SWD\MadridBundle\Entity\Checkeo $checkeo
+     * @param \App\Entity\Checkeo $checkeo
      */
-    public function removeCheckeo(\SWD\MadridBundle\Entity\Checkeo $checkeo)
+    public function removeCheckeo(\App\Entity\Checkeo $checkeo)
     {
         $this->checkeos->removeElement($checkeo);
     }

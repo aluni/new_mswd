@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Form;
+namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +34,7 @@ class ParticipanteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SWD\MadridBundle\Entity\Participante'
+            'data_class' => 'App\Entity\Participante'
         ));
     }
 

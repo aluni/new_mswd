@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Utils;
+namespace App\Services;
 
 /**
  * Servicio que se encarga de comprobaciones de seguridad. Es usado en distintas partes del proyecto

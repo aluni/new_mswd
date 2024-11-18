@@ -1,12 +1,14 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller\REST;
 
-use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\Request;
+
+use Doctrine\Common\Collections\Collection;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\View;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Controlador encargado del servicio REST de instituciones de s. Usa funcionalidades del FOSRestBundle (creación de 
@@ -17,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @copyright ALUNI MADRID S.L.
  * @Route("/instituciones")
  */
-class InstitucionesRESTController extends FOSRestController {
+class InstitucionesRESTController extends AluniRESTController {
 
     /**
      * @View(serializerGroups={"lista-instituciones"})

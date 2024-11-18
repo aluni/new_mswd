@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
@@ -55,13 +55,13 @@ class Sorteo {
 
     /**
      * @ORM\ManyToMany(targetEntity="Participante", mappedBy="sorteos")
-     * @Serializer\Type("ArrayCollection<SWD\MadridBundle\Entity\Participante>")
+     * @Serializer\Type("ArrayCollection<App\Entity\Participante>")
      */
     private $participantes;
 
     /**
      * @ORM\ManyToOne(targetEntity="Institucion", inversedBy="sorteos")
-     * @Serializer\Type("SWD\MadridBundle\Entity\Institucion")
+     * @Serializer\Type("App\Entity\Institucion")
      */
     private $institucion;
 
@@ -177,11 +177,11 @@ class Sorteo {
     /**
      * Add participante
      *
-     * @param \SWD\MadridBundle\Entity\Participante $participante
+     * @param \App\Entity\Participante $participante
      *
      * @return Sorteo
      */
-    public function addParticipante(\SWD\MadridBundle\Entity\Participante $participante) {
+    public function addParticipante(\App\Entity\Participante $participante) {
         $this->participantes[] = $participante;
 
         return $this;
@@ -190,9 +190,9 @@ class Sorteo {
     /**
      * Remove participante
      *
-     * @param \SWD\MadridBundle\Entity\Participante $participante
+     * @param \App\Entity\Participante $participante
      */
-    public function removeParticipante(\SWD\MadridBundle\Entity\Participante $participante) {
+    public function removeParticipante(\App\Entity\Participante $participante) {
         $this->participantes->removeElement($participante);
     }
 
@@ -208,11 +208,11 @@ class Sorteo {
     /**
      * Set institucion
      *
-     * @param \SWD\MadridBundle\Entity\Institucion $institucion
+     * @param \App\Entity\Institucion $institucion
      *
      * @return Sorteo
      */
-    public function setInstitucion(\SWD\MadridBundle\Entity\Institucion $institucion = null) {
+    public function setInstitucion(\App\Entity\Institucion $institucion = null) {
         $this->institucion = $institucion;
 
         return $this;
@@ -221,7 +221,7 @@ class Sorteo {
     /**
      * Get institucion
      *
-     * @return \SWD\MadridBundle\Entity\Institucion
+     * @return \App\Entity\Institucion
      */
     public function getInstitucion() {
         return $this->institucion;

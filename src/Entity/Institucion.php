@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Entity;
+namespace App\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
@@ -310,11 +310,11 @@ class Institucion extends Usuario {
     /**
      * Add checkeo
      *
-     * @param \SWD\MadridBundle\Entity\Checkeo $checkeo
+     * @param \App\Entity\Checkeo $checkeo
      *
      * @return Institucion
      */
-    public function addCheckeo(\SWD\MadridBundle\Entity\Checkeo $checkeo) {
+    public function addCheckeo(\App\Entity\Checkeo $checkeo) {
         $this->checkeos[] = $checkeo;
 
         return $this;
@@ -323,9 +323,9 @@ class Institucion extends Usuario {
     /**
      * Remove checkeo
      *
-     * @param \SWD\MadridBundle\Entity\Checkeo $checkeo
+     * @param \App\Entity\Checkeo $checkeo
      */
-    public function removeCheckeo(\SWD\MadridBundle\Entity\Checkeo $checkeo) {
+    public function removeCheckeo(\App\Entity\Checkeo $checkeo) {
         $this->checkeos->removeElement($checkeo);
     }
 
@@ -341,11 +341,11 @@ class Institucion extends Usuario {
     /**
      * Add sorteo
      *
-     * @param \SWD\MadridBundle\Entity\Sorteo $sorteo
+     * @param \App\Entity\Sorteo $sorteo
      *
      * @return Institucion
      */
-    public function addSorteo(\SWD\MadridBundle\Entity\Sorteo $sorteo) {
+    public function addSorteo(\App\Entity\Sorteo $sorteo) {
         $this->sorteos[] = $sorteo;
 
         return $this;
@@ -354,9 +354,9 @@ class Institucion extends Usuario {
     /**
      * Remove sorteo
      *
-     * @param \SWD\MadridBundle\Entity\Sorteo $sorteo
+     * @param \App\Entity\Sorteo $sorteo
      */
-    public function removeSorteo(\SWD\MadridBundle\Entity\Sorteo $sorteo) {
+    public function removeSorteo(\App\Entity\Sorteo $sorteo) {
         $this->sorteos->removeElement($sorteo);
     }
 

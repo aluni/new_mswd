@@ -1,9 +1,9 @@
 <?php
 
-namespace SWD\MadridBundle\Controller;
+namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use SWD\MadridBundle\Entity\Checkeo;
+use App\Entity\Checkeo;
 
 /**
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
  */
-class InstitucionesController extends Controller {
+class InstitucionesController extends AluniController {
 
     /**
      * @Route("/", name="instituciones")

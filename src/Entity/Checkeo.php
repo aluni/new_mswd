@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\MadridBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
@@ -39,7 +39,7 @@ class Checkeo {
     /**
      * @ORM\ManyToOne(targetEntity="Institucion", inversedBy="checkeos", cascade={"persist", "remove"}) 
      * @Serializer\Groups({"lista-participantes"})
-     * @Serializer\Type("SWD\MadridBundle\Entity\Institucion")
+     * @Serializer\Type("App\Entity\Institucion")
      */
     private $institucion;
 
@@ -82,11 +82,11 @@ class Checkeo {
     /**
      * Set participante
      *
-     * @param \SWD\MadridBundle\Entity\Participante $participante
+     * @param \App\Entity\Participante $participante
      *
      * @return Checkeo
      */
-    public function setParticipante(\SWD\MadridBundle\Entity\Participante $participante = null) {
+    public function setParticipante(\App\Entity\Participante $participante = null) {
         $this->participante = $participante;
 
         return $this;
@@ -95,7 +95,7 @@ class Checkeo {
     /**
      * Get participante
      *
-     * @return \SWD\MadridBundle\Entity\Participante
+     * @return \App\Entity\Participante
      */
     public function getParticipante() {
         return $this->participante;
@@ -104,11 +104,11 @@ class Checkeo {
     /**
      * Set institucion
      *
-     * @param \SWD\MadridBundle\Entity\Institucion $institucion
+     * @param \App\Entity\Institucion $institucion
      *
      * @return Checkeo
      */
-    public function setInstitucion(\SWD\MadridBundle\Entity\Institucion $institucion = null) {
+    public function setInstitucion(\App\Entity\Institucion $institucion = null) {
         $this->institucion = $institucion;
 
         return $this;
@@ -117,7 +117,7 @@ class Checkeo {
     /**
      * Get institucion
      *
-     * @return \SWD\MadridBundle\Entity\Institucion
+     * @return \App\Entity\Institucion
      */
     public function getInstitucion() {
         return $this->institucion;
