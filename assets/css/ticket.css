@@ -1,0 +1,49 @@
+#ticket {
+    float: left;
+    height: 271px;
+    width: 600px;
+}
+
+.lateral {
+    float: left;
+    height: 271px;
+    width: 100px;
+    font-size: 30px;
+}
+
+.textoLateralIzq {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    width: 150px;
+    padding-top: 130px;
+    padding-left: 120px;
+}
+
+.textoLateralDer {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    width: 150px;
+    padding-bottom: 160px;
+    padding-right: 80px;
+}
+
+.centro {
+    float: left;
+    padding-top: 115px;
+    font-size: 18px;
+    height: 156px;
+    width: 285px;
+}
+
+.contenedorQr {
+    float: left;
+    padding-top: 70px;
+    height: 201px;
+    width: 100px;
+}

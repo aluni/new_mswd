@@ -1,0 +1,11 @@
+{% extends "SWDMadridBundle::email_base.html.twig"%}
+
+{% block email_content %}
+    <p>
+        Junto a este email hemos adjuntado tu ticket de entrada, esperamos que disfrutes del evento. Por si acaso necesitas volver a descargar el ticket, aquí tienes el enlace:
+        <span style="color: #C0344F">| 
+            We have attached your ticket to this email, we hope you enjoy the event. Here is the link in case you need to download the ticket again:
+        </span>
+    </p>
+    <p><a href="{{ urlFichero }}" target="_blank">{{ urlFichero }}</a></p>
+{% endblock %}

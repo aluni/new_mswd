@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-xs-3">
+        {{ form_row(formSorteo.nombre) }}
+    </div>
+    <div class="col-xs-1">
+        {{ form_row(formSorteo.cantidad) }}
+    </div>
+    <div class="col-xs-2">
+        {{ form_row(formSorteo.condicion) }}
+    </div>
+    <div class="col-xs-2">
+        {{ form_row(formSorteo.institucion) }}
+    </div>
+    <div class="col-xs-1">
+        {{ form_row(formSorteo.horaInicio) }}
+    </div>
+    <div class="col-xs-1">
+        {{ form_row(formSorteo.horaFin) }}
+    </div>
+    <div class="col-sm-1">
+        <button ng-click="lanzarSorteo(sorteo)" ng-disabled="sorteoVacio(sorteo)" class="btn-u btn-estud"><b>Lanzar Sorteo</b> <i class="fa fa-play"></i></button>
+    </div>
+</div>
+<div class="row">
+    <div ng-repeat="ganador in ganadores track by $index" class="col-xs-2">
+        <input type="text" class="form-control" placeholder="Ganador" ng-model="ganador" 
+               typeahead-on-select="ganadores[$index] = ganador"
+               typeahead="participante as (participante.numero_entrada + ' ' + participante.nombre + ' ' + participante.apellidos) 
+                    for participante in participantes | filter:$viewValue | limitTo:10"/>
+    </div>
+    <div class="col-sm-3">
+        <button ng-click="anadirGanador(ganadores, sorteo.cantidad)" ng-disabled="sorteoVacio(sorteo)" class="btn-u btn-estud"><b>Añadir Ganador</b> <i class="fa fa-plus"></i></button>
+        <button ng-show="ganadores.length > 0" ng-click="guardarGanadores(ganadores, sorteo)" type="button" class="btn-u btn-estud"><i class="fa fa-save"></i> Guardar ganadores</button>
+    </div>
+
+</div>

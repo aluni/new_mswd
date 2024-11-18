@@ -1,0 +1,48 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section id="datos" class="container margin-bottom-20">
+        <h2>Mis datos <span class="inverso">| My info</span>:</h2>
+        Nombre completo <span class="inverso">| Full name</span>: <b>{{ participante.nombre ~ ' ' ~ participante.apellidos }}</b><br/>
+        Email <span class="inverso">| Email</span>: <b>{{ participante.email }}</b><br/>
+        Nacionalidad <span class="inverso">| Nationality</span>: <b>{{ participante.nacionalidad}}</b><br/>
+        Universidad <span class="inverso">| University</span>: <b>{{ participante.universidad }}</b><br/>
+        Ticket <span class="inverso">| Ticket</span>: <b><a href="{{ urlTicket }}" download><i class="fa fa-ticket"></i> Nº {{ participante.numeroEntrada }} (click for download)</a></b>
+    </section>
+    <div class="container-fluid azulito last">
+        <section id="inscripcion" class="container">
+            <h2>Concursos <span class="inverso">| Raffles</span>:</h2>
+            <p>Aquí aparecerán los concursos en los que participes
+                <span class="inverso">| Here will appear the raffles in which you participate</span></p>
+            <div class="row">
+                <ul>
+                    {% for sorteo in app.user.sorteos %}
+                        <li>{{ sorteo.nombre }}</li>
+                        {% endfor %}
+                </ul>
+                <div class="alert alert-info">
+                    <b>No raffles are open yet!!!</b>
+                </div>
+            </div>
+        </section>
+        <section id="inscripcion" class="container">
+            <h2>Instituciones <span class="inverso">| Institutions</span>:</h2>
+            <p>Aquí aparecerán las instituciones de los stands en los que te hayas checkeado
+                <span class="inverso">| Here will appear the institutions in whose stands you have checked in</span></p>
+            <div class="row">
+                <ul>
+                    {% for checkeo in app.user.checkeos %}
+                        <li>{{ checkeo.institucion.nombre }}</li>
+                        {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <div class="margin-bottom-40"></div>
+    </div>
+{% endblock content %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}

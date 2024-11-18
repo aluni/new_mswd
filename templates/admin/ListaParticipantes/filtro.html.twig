@@ -1,0 +1,39 @@
+<div class="row no-movil">
+    <div class="col-md-2 col-xs-6">
+        {{ form_row(formFiltrosParticipante.numero_entrada) }}
+    </div>
+    <div class="col-md-2 col-xs-6">
+        {{ form_row(formFiltrosParticipante.nombre) }}
+    </div>
+    <div class="col-md-2 col-xs-6">
+        {{ form_row(formFiltrosParticipante.apellidos) }}
+    </div>
+    <div class="col-md-2 col-xs-6">
+        {{ form_row(formFiltrosParticipante.email) }}
+    </div>
+    <div class="col-md-2 col-xs-6">
+        {{ form_row(formFiltrosParticipante.sexo) }}
+    </div>
+    <div class="col-md-2 col-xs-6">
+        {{ form_row(formFiltrosParticipante.pais) }}
+    </div>
+</div>
+{% if is_granted('ROLE_EMPLEADO') %}
+    <div class="row no-movil">
+        <div class="col-md-2 col-xs-6">
+            {{ form_row(formFiltrosParticipante.como_conoce) }}
+        </div>
+        <div class="col-md-2 col-xs-6">
+            {{ form_row(formFiltrosParticipante.asistido) }}
+        </div>
+        <div class="col-md-2 col-xs-6">
+            {{ form_row(formFiltrosParticipante.institucion) }}
+        </div>
+        {#<div class="col-md-2 col-xs-6">
+            {{ form_row(formFiltrosParticipante.premiado) }}
+        </div>#}
+        {#<div class="col-sm-6">
+            {{ form_row(formFiltrosParticipante.sorteos) }}
+        </div>#}
+    </div>
+{% endif %}

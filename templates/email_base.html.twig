@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Email de Aluni</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body style="margin: 0; padding: 0;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">	
+            <tr>
+                <td style="padding: 10px 0 30px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600"  style="background-color: #87C4D9; color: #36111F; border: 1px solid #cccccc; border-collapse: collapse;">
+                        <tr>
+                            <td align="center">
+                                <img style="margin: 40px 20px 40px 20px" src="https://www.studentwelcomeday.com/{{ asset('bundles/swdmadrid/src/img/mails/skyline.png') }}" alt="Logo de Aluni" width="600" height="243" style="display: block;" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 30px 40px 30px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td style=" font-family: Arial, sans-serif; font-size: 24px; text-align: center;">
+                                            {% block titulo %}{{ titulo|raw }}{% endblock %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 20px 0 0 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                                            {% block saludo %}
+                                                <p>Estimado/a {{ nombre }} <span style="color: #C0344F">| Dear {{ nombre }}:</span></p>
+                                            {% endblock %}
+                                            {% block email_content %}
+                                            {% endblock %}
+                                            {% block despedida %}
+                                                <p>
+                                                    Un saludo, <span style="color: #C0344F">| Regards, </span><br/>
+                                                    El equipo del MSWD <span style="color: #C0344F">| MSWD Team</span>
+                                                </p>
+                                            {% endblock %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 20px 0 0 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">    
+                                            <img src="https://www.studentwelcomeday.com/{{ asset('bundles/swdmadrid/src/img/mails/facebook-icon.png') }}" alt="Facebook" width="24" height="24" style="display: block;" border="0" />
+                                            Follow us on Facebook and get excited for the fifth edition of the Madrid Student Welcome Day on Oct. 3th! <a href="https://www.facebook.com/groups/454624111583061/" target="_blank">Click here!</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #555656; color: #cacccb;">
+                            <td style="padding: 30px 30px 30px 30px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td style="font-family: Arial, sans-serif; font-size: 14px;" width="75%">
+                                            &reg; Madrid Student Welcome Day, Madrid {{ 'now'|date('Y') }}<br/>
+                                            <a href="https://www.studentwelcomeday.com"><font color="#36111F">Aluni.net</font></a>
+                                        </td>
+                                        <td align="right" width="25%">
+                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold;">
+                                                        <a href="{{ twitter_url }}" target="_blank">
+                                                            <img src="https://www.studentwelcomeday.com/{{ asset('bundles/swdmadrid/src/img/mails/twitter-icon.png') }}" alt="Twitter" width="38" height="38" style="display: block;" border="0" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; padding-left: 10px;">
+                                                        <a href="{{ facebook_url }}" target="_blank">
+                                                            <img src="https://www.studentwelcomeday.com/{{ asset('bundles/swdmadrid/src/img/mails/facebook-icon.png') }}" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; padding-left: 10px;">
+                                                        <a href="{{ youtube_url }}" target="_blank">
+                                                            <img src="https://www.studentwelcomeday.com/{{ asset('bundles/swdmadrid/src/img/mails/youtube-icon.png') }}" alt="Youtube" width="38" height="38" style="display: block;" border="0" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; padding-left: 9px;">
+                                                        <a href="{{ google_plus_url }}" target="_blank">
+                                                            <img src="https://www.studentwelcomeday.com/{{ asset('bundles/swdmadrid/src/img/mails/googleplus-icon.png') }}" alt="Google+" width="38" height="38" style="display: block;" border="0" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

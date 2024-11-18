@@ -1,0 +1,28 @@
+{% extends "SWDMadridBundle:Nav:navegacion.html.twig" %}
+
+{% block menu %}
+    <li class="page-scroll home">
+        <a href="#video">Vídeo</a>
+    </li>
+    <li class="page-scroll">
+        <a href="#datos">Datos</a>
+    </li>
+    <li class="page-scroll">
+        <a href="#objetivos">Objetivos</a>
+    </li>
+    <li class="page-scroll">
+        <a href="#difusion">Difusión</a>
+    </li>
+    <li class="page-scroll">
+        <a href="#participar">Participar</a>
+    </li>
+    <li class="page-scroll">
+        <a href="{{ url('lista_instituciones') }}">Instituciones</a>
+    </li>
+    <li class="page-scroll">
+        <a href="#contacta">Contacta</a>
+    </li>
+    <li class="page-scroll">
+        <a href="{{ url('home') }}">Info. estudiantes</a>
+    </li>
+{% endblock %}

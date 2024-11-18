@@ -1,0 +1,106 @@
+<form id="formularioInscripcion">
+    <div class="col-sm-12">
+        <div id="mensajeError" class="alert alert-danger" hidden></div>
+        <div id="mensajeExito" class="alert alert-success" hidden></div>
+    </div>
+    <div class="col-sm-4">
+        <label>Nombre <span class="inverso">| First name</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <input id="nombre" type="text" class="form-control" required>
+            </div>                
+        </div>
+        <label>Apellidos <span class="inverso">| Last name</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <input id="apellidos" type="text" class="form-control" required>
+            </div>                
+        </div>
+        <label>Sexo <span class="inverso">| Gender</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <select id="sexo" class="form-control" required>
+                    <option></option>
+                    <option value="0">Mujer <span class="inverso">| Woman</span></option>
+                    <option value="1">Hombre <span class="inverso">| Man</span></option>
+                </select>
+            </div>                
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <label>Email <span class="inverso">| Email</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <input id="email" type="email" class="form-control" required>
+            </div>                
+        </div>
+        <label>Universidad o centro de estudios <span class="inverso">| College or school</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <input id="universidad" type="text" class="form-control" required>
+            </div>                
+        </div>
+        <label>Nacionalidad <span class="inverso">| Nationality</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <select id="nacionalidad" class="form-control" required>
+                    <option></option>
+                    {% for pais in paises %}
+                        <option value="{{ pais.es }}">{{ pais.es }} | {{ pais.en }}</option>
+                    {% endfor %}
+                </select>
+            </div>                
+        </div>
+        {#<label>Año de nacimiento <span class="inverso">| Birth year</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <select id="anoNacimiento" class="form-control" required>
+                    <option></option>
+                    {% for i in 2000..1925 %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>                
+        </div>#}
+    </div>
+    <div class="col-sm-4">
+        <label>¿Cómo nos has conocido? <span class="inverso">| How did you hear about us?</span></label>
+        <div class="row margin-bottom-20">
+            <div class="col-sm-12 col-md-offset-0">
+                <select id="comoConoce" class="form-control" onchange="comprobarOtro();" required{% if cc is not empty %} disabled{% endif %}>
+                    <option></option>
+                    {% for como in comoConoce %}
+                        {% if cc is not empty and cc == como.etiqueta %}
+                            <option value="{{ como.comoConoce }}" selected>{{ como.comoConoce }}</option>
+                        {% else %}
+                            <option value="{{ como.comoConoce }}">{{ como.comoConoce }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <input id="comoConoceOtro" type="text" class="form-control" placeholder="Escribe como conocíste este evento | Write how did you learn about this event" style="display: none">
+            </div>                
+        </div>
+        <label>Comentarios <span class="inverso">| Comments</span></label>
+        <div class="row margin-bottom-25">
+            <div class="col-sm-12">
+                <textarea id="observaciones" rows="2" class="form-control"></textarea>
+            </div>                
+        </div>
+{#        <div class="row margin-bottom-10">
+            <div class="col-sm-12">
+                <div class="checkbox">
+                    <label>
+                        <input id="aceptarSorteos" type="checkbox" required> <small>Participar en sorteos (Al marcar este check aceptas ceder tus datos a las empresas participantes en el evento que realicen sorteos) | <span class="inverso">Enter sweepstakes (By checking this check you agree to give your data to the companies participating in the event to conduct raffles)</span></small>
+                    </label>
+                </div>
+            </div>
+        </div>#}
+        <div class="row margin-bottom-10">
+            <div class="col-sm-12">
+                <input type="checkbox" onchange="document.getElementById('guardarInscripcion').disabled = !this.checked;"> He leído y acepto la <a href="{{ url('clausulaPrivacidad') }}" target="_blank" class="inverso">política de privacidad</a>
+            </div>
+        </div>
+        
+        <button id="guardarInscripcion" class="btn btn-u btn-estud" disabled><b>Guardar inscripción <span class="inverso">| Save form</span></b></button>
+    </div>
+</form> 

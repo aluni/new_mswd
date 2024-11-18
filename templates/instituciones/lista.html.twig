@@ -1,0 +1,11 @@
+<div class="row lista-instituciones">
+    <div ng-repeat="institucion in instituciones | filter:filtro" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 compacto">
+        <a href="{{ url('ver_institucion') }}/[[ institucion.alias ]]" target="_blank">
+            <div class="institucion">
+                <center class="contenedor-institucion">
+                    <img ng-src="{{ urlLogos }}/[[ institucion.logo ]]" alt="[[ institucion.nombre ]]" onerror="this.src = imgError" target="_blank" class="img-responsive" />
+                </center>
+            </div>
+        </a>
+    </div>
+</div>

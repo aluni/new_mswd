@@ -1,0 +1,11 @@
+web_controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+rest_controller:
+    resource: ../src/Controller/REST/
+    type: annotation
+    prefix:  /api
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

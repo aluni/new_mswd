@@ -1,0 +1,33 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section id="concurso" class="container last">
+        <h1>Ganadores de los Sorteos del MSWD <span class="inverso">| MSWD Raffles Winners</span></h1>
+        <h4>Are you one of the lucky winners? Congrats! To redeem your prize please send an email to <a href="mailto:info@studentwelcomeday.com">info@studentwelcomeday.com</a>!</h4>
+        <p>En esta página se irán publicando los ganadores de los distintos sorteos del MSWD <span class="inverso">|
+                Here is where we'll be uploading the winners of the various raffles at MSWD</span>
+        </p>
+        {#<p>Para ver la lista completa de sorteos haced <a href="{{ url('blog_ver_entrada') }}/5375160984868919881">click aqui</a> <span class="inverso">|
+                To check the complete list of raffles <a href="{{ url('blog_ver_entrada') }}/5375160984868919881">click here</a> </span>
+    </p>#}
+        {% for sorteo in sorteos %}
+            <h4>{{ sorteo.institucion.nombre}} - {{ sorteo.nombre }}:</h4>
+            <div class="block">
+                <ul>
+                    {% for ganador in sorteo.participantes %}
+                        <li>
+                            {{ ganador.numeroEntrada }} - <b>{{ ganador.nombre }} {{ ganador.apellidos }}</b>, <span class="inverso">{{ ganador.nacionalidad }}</span>,
+                            {{ ganador.universidad }}{% if is_granted('ROLE_ADMIN') %} - <b>{{ ganador.email }}</b>{% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}

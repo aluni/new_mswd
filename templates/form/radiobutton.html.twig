@@ -1,0 +1,9 @@
+{% for opcion in form %}
+    <div class="radio">
+        {% if label_attr.iconosTarjetas is defined %}
+            <i style="width: 70px" class="fa fa-3x {{ label_attr.iconosTarjetas[loop.index-1] }}"></i> <label>{{ form_widget(opcion, {'attr': attr}) }}{{ form_label(opcion) }}</label>
+        {% else %}
+            <label>{{ form_widget(opcion, {'attr': attr}) }}{{ form_label(opcion) }}</label>
+        {% endif %}
+    </div>
+{% endfor %}

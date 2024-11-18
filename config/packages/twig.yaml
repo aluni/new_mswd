@@ -1,0 +1,11 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    file_name_pattern: '*.twig'
+    globals:
+        urls:
+            portal: "%urls.portal%"
+        tamanoPag: "%tamanoPag%"
+
+when@test:
+    twig:
+        strict_variables: true

@@ -1,0 +1,11 @@
+{% extends "SWDMadridBundle::email_base.html.twig"%}
+
+{% block email_content %}
+    <p>
+        Bienvenido al Madrid Student Welcome Day, cuando hagas click en el siguiente enlace validarás tu inscripción y recibirás un segundo email con tu entrada
+        <span style="color: #C0344F">| 
+            Welcome to Madrid Student Welcome Day, click the following link to validate your registration, and you will receive a second email with your ticket
+        </span>
+    </p>
+    <p><a href="{{ url('validarParticipante', {'numeroEntrada': numeroEntrada}) }}" target="_blank">{{ url('validarParticipante', {'numeroEntrada': numeroEntrada}) }}</a>
+{% endblock %}

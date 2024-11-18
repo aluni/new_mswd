@@ -1,0 +1,346 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-instituciones.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div id="intro">
+        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/encabezado-instituciones.jpg') }}">
+        {#        <a href="https://issuu.com/aluni.net/docs/revista_b_2017?ff=true" target="_blank" class="btn btn-lg btn-transp btn-carrusel">¡Descarga la revista oficial!</a>#}
+    </div>
+    <div class="bg-grey">
+        <div id="video" class="about-image content-sm">
+            <div class="container">
+                <div class="title-v1">
+                    <h1>Madrid dará la bienvenida a todos los estudiantes de fuera</h1>
+                    <h4>En un solo día conocerán todo lo que Madrid les ofrece.</h4>
+                    <p class="page-scroll">Para más información contáctanos <a class="btn btn-danger" href="#contacta">aquí</a></p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <iframe class="marco-video img-responsive margin-bottom-30" width="800" height="600" src="https://www.youtube.com/embed/TJgWgwxeVRU" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-sm-6">
+                        <iframe class="marco-video img-responsive" width="800" height="600" src="https://www.youtube.com/embed/3fvxWasz-qE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                {% include 'SWDMadridBundle:Default:albumes.html.twig' %}
+            </div>
+        </div>
+        <div id="datos" class="parallax-counter parallaxBg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="counters">
+                            <span>> </span><span class="counter">50,000</span>
+                            <h4>estudiantes extranjeros</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="counters">
+                            <span>> </span><span class="counter">81,000</span>
+                            <h4>estudiantes españoles foráneos</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="counters">
+                            <span>> </span><span class="counter">1,300,000,000</span><span> €</span>
+                            <h4>invierten cada año en Madrid</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content-sm">
+            <div class="row service-box-v1">
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-block service-block-default">
+                        <h1 class="heading-md">Qué</h1>
+                        <h4>Es el acto de bienvenida oficial de la ciudad Madrid a todos los estudiantes que han elegido la capital de España como el mejor lugar para su formación.</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="service-block service-block-default">
+                        <h1 class="heading-sm">Cuándo</h1>
+                        <h4>Recién llegados los estudiantes a Madrid: El sábado 25 de septiembre de 2021, desde 11:00 de la mañana hasta las 19:00 de la noche</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-block service-block-default">
+                        <h1 class="heading-sm">Dónde</h1>
+                        <h4>En el corazón de Madrid: en misma sede del Ayuntamiento, en la galería de Cristal del Palacio de Cibeles</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-grey">
+            <div id="objetivos" class="container content-sm">
+                <div class="title-v1">
+                    <h2>Objetivos generales del evento</h2>
+                </div>
+                <div class="row" style="position: relative;">
+                    <div class="col-sm-6 content-boxes-v3">
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Informar a los estudiantes en un solo acto de todas las ventajas que les ofrece Madrid (la ciudad y sus instituciones, públicas y privadas), de tal manera que puedan sacar el máximo provecho de su estancia en nuestra ciudad.</h4>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Facilitar a los estudiantes el acceso a las mejores ofertas de los productos y servicios que más necesitan durante su estancia.</h4>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Que los estudiantes sientan la hospitalidad de la ciudad en la que van a vivir durante sus estudios, para que deseen volver y se conviertan en nuestros mejores embajadores cuando regresen a sus países.</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-8 col-sm-offset-0 col-xs-offset-2" >
+                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/panel5.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content-sm">
+            <div class="title-v1">
+                <h2>Objetivos particulares del evento</h2>
+                <h4>Que los estudiantes conozcan desde el primer día: la organización, la oferta cultural, académica, histórico-artística, gastronómica, lúdica, comercial y natural de la región de Madrid. En concreto:</h4>
+            </div>
+            <div class="row content-boxes-v3 objetivos">
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-museum37"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Museos y exposiciones</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-school3"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Estudios de posgrado</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-map29"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Rutas históricas por la ciudad y la región</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-green6"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Parques, jardines, anillo ciclista</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-mountain6"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Sierra de Madrid, tren de la naturaleza, estaciones de esquí. </h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-class11"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">El valor del castellano y del certificado DELE </h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-madrid"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Medios de transporte (Metro, rutas de autobús) abono transporte</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-business133"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Carnet joven de la Comunidad de Madrid</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-instrument7"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Eventos culturales, lúdicos y deportivos destacados previstos para el curso 2020-2021</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-phone136"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Telefonía móvil</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-man244"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Servicios bancarios para universitarios</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-patient1"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Seguros médicos</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-bed33"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Alojamientos (para los estudiantes y para sus familias cuando vienen a visitarles)</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-class11"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Centros de idiomas, especialmente de castellano</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-upper20"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Gimnasios y polideportivos</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-shelf1"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Librerías y editoriales</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-student1"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Bibliotecas públicas y privadas</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-delivery52"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Servicios de paquetería y envíos</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-healthyfood5"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Alimentación y bebidas</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-hairdresser5"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Peluquerías y estética</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-segovia"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Visitas culturales a Toledo, Aranjuez, Segovia, Alcalá, El Escorial, Ávila, Cuenca…</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-giraffe9"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Parques de atracciones y zoológico</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-copy32"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Material informático y aplicaciones</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-traffic17"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Alquiler de coches</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-mountain24"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Alquiler de bicicletas</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-help20"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">ONGs solidarias para estudiantes</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-beer13"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Bares y restaurantes</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-film50"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Cines y teatros</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-man204"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Salas de fiestas</h2></div></div>
+                <div class="col-md-4 col-sm-6"><i class="icon-custom rounded-x icon-bg-dark flaticon-mannequin2"></i> <div class="content-boxes-in-v3"><h2 class="heading-sm">Tiendas de moda joven…</h2></div></div>
+            </div>
+        </div>
+        <div>
+            <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/header7.jpg') }}" alt="">
+        </div>
+        {#
+        <div id="patrocinadores" class="container content-sm">
+            <div class="title-v1">
+                <h2>Quien patrocina el evento</h2>
+            </div>
+            <div class="row margin-bottom-20">
+                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <a href="http://www.014media.com/sociedades/unicampus/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-unicampus.png') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-xs-12">
+                    <h4>Organización y promoción del MSWD.</h4>
+                </div>
+            </div>
+            <div class="row margin-bottom-20">
+                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <a href="http://www.universia.es/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-universia.jpg') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-xs-12">
+                    <h4>Promoción del MSWD.</h4>
+                </div>
+            </div>
+            <div class="row margin-bottom-20">
+                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <a href="http://www.aluni.net" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-aluni.png') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-xs-12">
+                    <h4>Empresa fundadora del MSWD.</h4>
+                </div>
+            </div>
+            <div class="row margin-bottom-20">
+                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <a href="http://www.madrid.es/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-aytoMadrid.png') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-xs-12">
+                    <h4>Patrocinado por “Madrid Destino Cultura, Turismo y Negocio”.</h4>
+                </div>
+            </div>
+            {#<div class="row margin-bottom-20">
+                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <a href="http://www.madrid.org/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-comMadrid.jpg') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-xs-12">
+                    <h4>La Comunidad Autónoma de Madrid, a través de la Dirección General de Turismo.</h4>
+                </div>
+            </div>
+        </div>
+        #}
+        <div class="bg-grey">
+            <div id="difusion" class="container content-sm">
+                <div class="title-v1">
+                    <h2>Difusión del evento</h2>
+                </div>
+                <div class="row" style="position: relative;">
+                    <div class="col-sm-7 content-boxes-v3 margin-bottom-40">
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>La convocatoria llegará a todos los estudiantes universitarios extranjeros que están en la Comunidad de Madrid. El acto será conocido por todas las instituciones de educación superior, públicas y privadas, de la Comunidad.</h4>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Igualmente se informará a las universidades de origen que envían los estudiantes a Madrid. </h4>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Y muchísima gente de la ciudad tendrá noticia del evento a través de los medios de comunicación.</h4>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Las autoridades académicas de las instituciones educativas invitarán -habitualmente por email- a todos los estudiantes, animándoles a participar en el evento. </h4>
+                            </div>
+                        </div>
+                        {# <div class="clearfix margin-bottom-30">
+                             <div class="content-boxes-in-v3">
+                                 <h4>Durante los quince días previos al evento habrá en las entradas de las diversas Escuelas y Facultades stands informativos del Welcome Day.</h4>
+                             </div>
+                         </div>#}
+                        <div class="clearfix margin-bottom-30">
+                            <div class="content-boxes-in-v3">
+                                <h4>Desde las redes sociales se dará la máxima difusión al evento.</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/panel8.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="participar" class="container content-sm">
+            <div class="title-v1">
+                <h2>¿Cómo participan las instituciones?</h2>
+                <h4>Todas las instituciones públicas y privadas que participan en el acto lo hacen con distinto grado de presencia según su grado de aportación, pudiendo elegir los siguientes productos:</h4>
+            </div>
+            <div class="block content-boxes-v3">
+                <div class="margin-bottom-10">
+                    <i class="icon-custom rounded-x icon-bg-dark flaticon-cinema24"></i>
+                    <div class="content-boxes-in-v3">
+                        <h4>1ª Presencia con Stand propio durante la jornada. El tamaño del espacio reservado y el modelo de stand varían en función del volumen del patrocinio elegido (consultar hoja de tarifas).</h4>
+                    </div>
+                </div>
+                <div class="margin-bottom-10">
+                    <i class="icon-custom rounded-x icon-bg-dark fa fa-youtube-play"></i>
+                    <div class="content-boxes-in-v3">
+                        <h4>2º Presencia el escenario del evento, mediante vídeos, actuaciones, etc.</h4>
+                    </div>
+                </div>
+                <div class="margin-bottom-30">
+                    <i class="icon-custom rounded-x icon-bg-dark flaticon-branding"></i>
+                    <div class="content-boxes-in-v3">
+                        <h4>3º Presencia en el material promocional: </h4>
+                        <ul style="font-size: 18px;">
+                            <li>Inserción de folleto publicitario en el welcome pack que se dará a todos los estudiantes presentes en la feria.</li>
+                            <li>Presencia de la marca en la web del evento.</li>
+                            <li>Presencia en el newsletter periódico informativo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="container">
+            {% include 'SWDMadridBundle:Default:organizadores.html.twig' %}
+        </section>
+        <div class="contacts-section margin-top-20 last">
+            <div id="contacta" class="container content-sm">
+                <div class="title-v1">
+                    <h2>Contacta</h2>
+                </div>
+                <div class="row contacts-in">
+                    <div class="col-md-6 md-margin-bottom-40">
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-globe"></i> <a href="http://www.aluni.net/">Aluni.net</a></li>
+                            <li><i class="fa fa-home"></i> C/ Hilarión Eslava, 12, Bajo B, 28015 Madrid</li>
+                            <li><i class="fa fa-phone"></i> +34 619 71 49 68</li>
+                            <li><i class="fa fa-envelope"></i> <a href="mailto:info@studentwelcomeday.com"> info@studentwelcomeday.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <form>
+                            <label>Nombre <span class="color-red">*</span></label>
+                            <div class="row margin-bottom-20">
+                                <div class="col-md-7 col-md-offset-0">
+                                    <input id="nombre" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <label>Email <span class="color-red">*</span></label>
+                            <div class="row margin-bottom-20">
+                                <div class="col-md-7 col-md-offset-0">
+                                    <input id="email" type="email" class="form-control" required>
+                                </div>
+                            </div>
+                            <label>Mensaje <span class="color-red">*</span></label>
+                            <div class="row margin-bottom-20">
+                                <div class="col-md-11 col-md-offset-0">
+                                    <textarea  id="mensaje" rows="8" class="form-control" required></textarea>
+                                </div>
+                            </div>
+                            <div id="mensajeError" class="alert alert-danger" hidden></div>
+                            <div id="mensajeExito" class="alert alert-success" hidden></div>
+                            <h4><div id="enviarEmailContactar" onclick="enviarEmailContactar();" class="btn-u btn-brd btn-brd-hover btn-u-dark">Enviar Mensaje</div></h4>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            function enviarEmailContactar() {
+                var data = new Object;
+                $('#enviarEmailContactar').removeAttr('onclick');
+                $('#enviarEmailContactar').html('<i class="fa fa-circle-o-notch fa-spin"></i> Enviando...');
+                data.nombre = $('#nombre').val();
+                data.email = $('#email').val();
+                data.mensaje = $('#mensaje').val();
+                $.post("{{ url('enviarEmailContactar') }}", data, function (response) {
+                    $('#mensajeExito').html(response);
+                    $('#mensajeExito').fadeIn(500).delay(1500).fadeOut(500);
+                    $('#enviarEmailContactar').attr('onclick', 'enviarEmailContactar();');
+                    $('#enviarEmailContactar').html('Enviar');
+                });
+            }
+            ;
+        </script>
+    {% endblock %}
+

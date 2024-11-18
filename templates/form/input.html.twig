@@ -1,0 +1,17 @@
+{{ form_errors(form) }}
+{% if label_attr.icono is defined %}
+    <div class="input-group merged">
+        <span class="input-group-addon left" style="max-width: 35px">
+            <i class="{{ label_attr.icono }}"></i>
+        </span>
+{% endif %}
+{% set attr = attr|merge({'class': 'form-control', 'placeholder': label|trans}) %}
+{{ form_widget(form, {'attr': attr}) }}
+{% if label_attr.icono is defined %}
+    {% if label_attr.iconoDerecha is defined %}
+        <span class="input-group-addon" style="max-width: 35px">
+            <i class="{{ label_attr.iconoDerecha }}"></i>
+        </span>
+    {% endif %}
+    </div> 
+{% endif %}

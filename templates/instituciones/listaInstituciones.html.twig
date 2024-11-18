@@ -1,0 +1,46 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div ng-app="institucionesApp" class="container last">
+        <h2>Lista de Instituciones <span class="inverso">| List of Companies</span></h2>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a target="_blank" class="btn btn-estud" href="{{  url('easyadmin') }}">
+                <i class="fa fa-edit"></i> Editar instituciones
+            </a>
+        {% endif %}
+        <div id="mensajeEspera" class="row">
+            <center>
+                <h3><i class="fa fa-spinner fa-spin"></i> Cargando <span class="inverso">| Loading ...</span></h3>
+            </center>
+        </div>
+        <div class="seccionAngular" ng-controller="Instituciones">
+            {% include 'SWDMadridBundle:Instituciones:lista.html.twig' %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/instituciones.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var institucionesREST = "{{ institucionesREST }}";
+    </script> 
+    {# AngularJS #}
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-sanitize/angular-sanitize.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-resource/angular-resource.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
+    {# Aplicación del Blog #} 
+    <script src="{{ asset('bundles/swdmadrid/src/js/funciones_aux.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/src/js/institucionesApp/institucionesControllers.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/src/js/institucionesApp/institucionesApp.js') }}"></script>
+{% endblock %}

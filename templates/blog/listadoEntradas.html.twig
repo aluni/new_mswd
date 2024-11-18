@@ -1,0 +1,41 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div ng-app="aluniBlogApp" class="container last">
+        <div id="mensajeEspera" class="row">
+            <center>
+                <h3><i class="fa fa-spinner fa-spin"></i> Cargando <span class="inverso">| Loading ...</span></h3>
+            </center>
+        </div>
+        <div id="listadoAngular" ng-controller="Blog">
+            {% include 'SWDMadridBundle:Blog:listadoEntradas/col_categorias.html.twig' %}
+            {% include 'SWDMadridBundle:Blog:listadoEntradas/col_entradas.html.twig' %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var entradasREST = "{{ urlEntradas }}";
+    </script>
+    {# AngularJS #}
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-sanitize/angular-sanitize.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-resource/angular-resource.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
+    {# Aplicación del Blog #} 
+    <script src="{{ asset('bundles/swdmadrid/src/js/funciones_aux.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/src/js/blogApp/blogFilters.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/src/js/blogApp/blogControllers.js') }}"></script>
+    <script src="{{ asset('bundles/swdmadrid/src/js/blogApp/blogApp.js') }}"></script>
+{% endblock %}

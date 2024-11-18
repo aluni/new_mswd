@@ -1,0 +1,20 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container last">
+        <div id="entradaContainer" class="col-md-8 col-md-offset-2 fieldsetEstudiante">
+            <h1 style="text-align: center">{{ entrada.title }}</h1>
+            <p>{{ entrada.content|raw }}</p>
+            <hr/>
+            <a href="{{ url('blog_listado_entradas') }}" class="btn btn-lg back-to-top" style="margin-bottom: 30px;"><i class="fa fa-reply"></i> Volver al listado <span class="inverso">| Back to the list</span></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}

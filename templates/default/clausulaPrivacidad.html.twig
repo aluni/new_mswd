@@ -1,0 +1,27 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section id="datos" class="container last">
+        <div class="block">
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Cláusula de Privacidad</h1>
+                <p>ALUNI MADRID SL garantiza la protección y confidencialidad de los datos personales, de cualquier tipo que nos proporcionen nuestras empresas clientes de acuerdo con lo dispuesto en el Reglamento General de Protección de Datos de Carácter Personal.</p>
+                <p>Todos los datos facilitados por nuestras empresas clientes a ALUNI MADRID SL o a su personal, serán incluidos en un fichero automatizado de datos de carácter personal creado y mantenido bajo la responsabilidad de ALUNI MADRID SL, imprescindibles para prestar los servicios solicitados por los usuarios.</p>
+                <p>Los datos facilitados serán tratados en los términos establecidos en el Reglamento General de Protección de Datos de Carácter Personal, en este sentido ALUNI MADRID SL ha adoptado los niveles de protección que legalmente se exigen, y ha instalado todas las medidas técnicas a su alcance para evitar la pérdida, mal uso, alteración, acceso no autorizado por terceros. No obstante, el usuario debe ser consciente de que las medidas de seguridad en Internet no son inexpugnables. En caso en que considere oportuno que se cedan sus datos de carácter personal a otras entidades, el usuario será informado de los datos cedidos, de la finalidad del fichero y del nombre y dirección del cesionario, para que de su consentimiento inequívoco al respecto.</p>
+                <p>En cumplimiento de lo establecido en el RGPD, el usuario podrá ejercer sus derechos de acceso, rectificación, cancelación/supresión, oposición, limitación o portabilidad. Para ello debe de contactar con nosotros en «Dirección», «Localidad».</p>
+                <p>Con objeto de garantizar el cumplimiento de la normativa sobre protección de datos de carácter personal, ALUNI MADRID SL ha recibido los servicios de consultoría y asesoramiento por parte de www.clickdatos.es</p>
+                <h5>INFORMACIÓN FACILITADA EN LOS FORMULARIOS</h5>
+                <p>En nombre de la empresa ALUNI tratamos la información que nos facilita con el fin de prestarles el servicio solicitado, realizar la facturación del mismo. Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales. Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal.</p>
+                <p>Los estudiantes, dentro del evento, libremente se registran en cada stand que ellos desean, y al registrarse, autorizan a dicha empresa a acceder a sus datos de registro en el evento: nombre y apellidos, nacionalidad, cómo conoce el evento, email, género</p>
+                <p>Los nombres y apellidos de los ganadores de los sorteos celebrados durante el evento se publicarán en la web del evento.</p>
+                <p>Usted tiene derecho a obtener confirmación sobre si en ALUNI MADRID SL estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios. Responsable: Identidad: ALUNI MADRID SL - NIF: B83833533  Dir. postal: C/ Hilarión Eslava, 12, 28015 MADRID Teléfono: 915432031   Correo elect: juridico@aluni.net</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}

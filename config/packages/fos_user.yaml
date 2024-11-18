@@ -1,0 +1,24 @@
+# FOSUser Configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: App\Entity\Usuario
+    from_email:
+        address:  apli@aluni.net
+        sender_name:    Aluni.net
+    service:
+        mailer: App\Services\UsersMailer
+    registration:
+        confirmation:
+            from_email:
+                address:  apli@aluni.net
+                sender_name:    Aluni.net
+            enabled: true
+#            template: App:Mails:confirmacion_registro.html.twig
+#        form:
+#            type: App\form\RegistrationFormType
+    resetting:
+        email:
+            from_email:
+                address:        apli@aluni.net
+                sender_name:    Aluni.net

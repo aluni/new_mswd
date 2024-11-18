@@ -1,0 +1,38 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container last">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 ver-institucion">
+                <center>
+                    <div class="thumbnail-img">
+                        <a href="{{ institucion.url }}" target="_blank">
+                            <div class="overflow-hidden">
+                                <img class="img-responsive" style="max-height: 250px;" src="{{ urlLogos }}/{{ institucion.logo }}" alt="">
+                            </div>
+                        </a>                   
+                    </div>
+                </center>      
+                <div class="caption margin-top-20">
+                    <center>
+                        <h2>{{ institucion.nombre }}</h2>
+                        <h4><a href="{{ institucion.url }}" target="_blank">{{ institucion.url }}</a></h4>
+                    </center>
+                    <div style="font-size: 15px" align="justify">
+                        {{ institucion.descripcion|raw }}
+                    </div>
+                </div>
+                <a href="{{ url('lista_instituciones') }}" class="btn btn-lg back-to-top margin-top-20"><i class="fa fa-reply"></i> Volver al listado <span class="inverso">| Back to the list</span></a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/instituciones.css') }}">
+{% endblock %}

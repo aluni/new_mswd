@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th class="no-movil" style="width: 60px;"><a href='' ng-click="ordenar='numero_entrada'; descendente=!descendente">Nº <i class="fa fa-chevron-[[ descendente?'down':'up']]"></i></a></th>
+                    <th>Nombre Completo</th>
+                    <th>Email</th>
+                    <th class="no-movil">País</th>
+                    <th class="no-movil">Sexo</th>
+                    <th class="no-movil"><a href='' ng-click="ordenar='universidad'; descendente=!descendente">Universidad<i class="fa fa-chevron-[[ descendente?'down':'up']]"></i></a></th>
+                    <th class="no-movil">¿Cómo nos conoce?</th>
+                    <th class="no-movil">Sorteos ganados</th>
+                        {% if is_granted('ROLE_EMPLEADO') %}
+                        <th>Asist.</th>
+                        {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="participante in participantes | filter:filtro | premiados:filtroext.premiado | checkeadosInstitucion:filtroext.institucionId | orderBy:ordenar:descendente | limitTo:(tamanoPag*(pagActual-1) - filtradoLong) | limitTo:tamanoPag">
+                    <td class="no-movil">[[ participante.numero_entrada ]]</td>
+                    <td>[[ participante.nombre ]] [[ participante.apellidos ]]</td>
+                    <td>[[ participante.email ]]</td>
+                    <td class="no-movil">[[ participante.nacionalidad ]]</td>
+                    <td class="no-movil">[[ (participante.sexo == '1')?'Hombre':'Mujer' ]]</td>
+                    <td class="no-movil">[[ participante.universidad ]]</td>
+                    <td class="no-movil">[[ participante.como_conoce ]]</td>
+                    <td class="no-movil">
+                        <p ng-repeat="sorteo in participante.sorteos">
+                            <b class="inverso">[[ sorteo.nombre ]]</b>
+                        </p>
+                        {#{% if sorteos is defined %}
+                            <input type="text" ng-model="participante.sorteo"/>
+                            <a ng-click="guardarGanador(participante)" style="color: white !important" href="" class="btn btn-xs btn-primary">
+                                <i class="fa fa-save"></i>
+                            </a>
+                        {% else %}
+                            [[ participante.sorteo ]]
+                        {% endif %}#}
+                    </td>
+                    {% if is_granted('ROLE_EMPLEADO') %}
+                        <td ng-if="participante.asistido == '0'">
+                            <a ng-click="marcarAsistencia(participante)" style="color: white !important" href="" class="btn btn-xs btn-success">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </td>
+                        <td ng-if="participante.asistido == '1'">
+                            <a ng-click="desmarcarAsistencia(participante)" style="color: white !important" href="" class="btn btn-xs btn-warning">
+                                <i class="fa fa-check"></i> [[ participante.hora_entrada ]]
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-10">
+        {% include "SWDMadridBundle:Angular:paginacion.html.twig" %}
+    </div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <button ng-click="refrescarParticipantes()" class="btn-o btn-lg btn-estud margin-top-20"><i class="fa fa-refresh"></i> Refrescar lista</button>
+    </div>
+    <div class="alert alert-warning solo-movil margin-top-20">
+        ¡La pantalla es muy estrecha como para mostrar todos los datos del participante, solo se mostrará su nombre y email!
+    </div>
+</div>

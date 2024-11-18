@@ -1,0 +1,26 @@
+<li class="page-scroll">
+    <a href="{{ url('lista_ganadores') }}">Raffles</a>
+</li>
+<li class="page-scroll">
+    <a id="news" href="{{ url('blog_listado_entradas') }}">News</a>
+</li>
+<li class="page-scroll">
+    <a href="{{ url('blog_ver_entrada') }}/5073375951999633840">Schedule</a>
+</li>
+<li class="page-scroll">
+    <a href="{{ url('lista_instituciones') }}">Companies</a>
+</li>
+<li class="page-scroll">
+    <a href="{{ url('instituciones') }}">Web for Exhibitors</a>
+</li>
+<li class="page-scroll">
+    <a href="{{ url('infoParticipante') }}">
+        <i class="fa fa-user"></i> 
+        {% if is_granted('ROLE_USER') %}Account{% else %}Login{% endif%}
+    </a>
+</li>
+{% if is_granted('ROLE_USER') %}
+    <li class="page-scroll home">
+        <a id="logout" href="{{ url('fos_user_security_logout') }}"><i class="fa fa-lg fa-power-off"></i></a>
+    </li>
+{% endif %}

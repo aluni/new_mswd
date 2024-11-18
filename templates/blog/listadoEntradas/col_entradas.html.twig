@@ -1,0 +1,32 @@
+<div class="col-md-9 blog-roll blog-list">
+    <div class="row">
+        <a href="#"  ng-repeat="label in filtroaux.labels" ng-click="quitarEtiqueta(label)" class="btn btn-xs btn-estud margin-right-10">
+            [[ label ]] <span class="inverso"><i class="fa fa-times"></i></span>
+        </a>
+    </div>
+    <div ng-repeat="entrada in entradas | filter:filtro | tieneEtiquetas:filtroaux.labels | orderBy:'published':true | limitTo: tamanoPag*(pagActual-1) - filtradoLong | limitTo: tamanoPag" class="media row">
+        <div class="col-xs-12">
+            <div ng-if="entrada.labels" class="tags">
+                <i class="fa fa-tags"></i>
+                <a ng-repeat="tag in entrada.labels" href="#" class="tag"> [[ tag ]], </a> 
+            </div>
+            <h4 class="title media-heading"><a href="{{ url('blog_ver_entrada') }}/[[ entrada.id ]]">[[ entrada.title ]]</a> <small>[[ entrada.published|date:'mediumDate' ]]</small></h4> 
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{{ url('blog_ver_entrada') }}/[[ entrada.id ]]" class="media-object">
+                        <img src="[[ entrada.image ]]" class="img-responsive" />
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <p>
+                        <span ng-bind-html="entrada.content|htmlToPlaintext|limitTo:300"></span>...
+                    </p>
+                    <ul class="list-inline links">
+                        <li><a target="_blank" href="{{ url('blog_ver_entrada') }}/[[ entrada.id ]]"><i class="fa fa-circle-arrow-right"></i> Leer más | Read more</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>    
+    </div>
+    {% include "SWDMadridBundle:Angular:paginacion.html.twig" %}                
+</div>

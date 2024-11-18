@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es"> 
+    <head>
+        <title>Madrid Student Welcome Day</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Acto de bienvenida oficial de la ciudad Madrid a todos los estudiantes - MSWD">
+        <meta name="author" content="MSWD">
+        <link rel="shortcut icon" href="favicon.ico">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/css/one.style.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/line-icons/line-icons.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/font-awesome/css/font-awesome.min.css') }}">    
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/pace/pace-flash.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/owl-carousel/owl.carousel.css') }}">    
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/revolution-slider/css/settings.css') }}" media="screen">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/plugins/cube-portfolio/templates/lightbox-gallery/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/css/flaticon/flaticon.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/css/theme-colors/dark-red.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/vendor/css/custom.css') }}">
+        {% endblock %}
+        {% block custom_stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd.css') }}">
+        {% endblock %}
+    </head>
+    <body id="body" data-spy="scroll" class="demo-lightbox-gallery">
+        <header>
+            {% block navigation %}
+                {% include 'SWDMadridBundle:Nav:menu-estudiantes.html.twig' %}
+            {% endblock %}
+        </header>
+        <main id="content" class="pag-estud">
+            {% include 'SWDMadridBundle::mensajes.html.twig' %}   
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        {% if not app.request.cookies.has('accept_cookies') %}
+            <div class="centrar">
+                <div id="avisoCookies" class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" onclick="Cookies.set('accept_cookies', 'true', { expires: 31 });" data-dismiss="alert" aria-label="Close"><i class="fa fa-times"></i></button>
+                    En MSWD utilizamos <b>Cookies</b> para mejorar su experiencia. <a href="{{ url('clausulaPrivacidad') }}" target="_blank">Leer más</a>
+                </div>
+            </div>
+        {% endif %}
+        {% block footer %}
+            {% include "SWDMadridBundle:Footer:footer.html.twig" %}
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/jquery-1.11.1.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/jquery-migrate-1.2.1.min.js') }}"></script>    
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/jquery.easing.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/pace/pace.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/jquery.parallax.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/counter/waypoints.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/counter/jquery.counterup.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/owl-carousel/owl.carousel.js') }}"></script>    
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/revolution-slider/js/jquery.themepunch.tools.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/revolution-slider/js/jquery.themepunch.revolution.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/plugins/cube-portfolio/templates/lightbox-gallery/js/main.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/js/one.app.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/js/plugins/pace-loader.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/js/plugins/owl-carousel.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/js/plugins/revolution-slider.js') }}"></script>
+            <script src="{{ asset('bundles/swdmadrid/vendor/js/js-cookie/src/js.cookie.js') }}"></script>
+            <script>
+                    jQuery(document).ready(function () {
+                        App.init();
+                        App.initCounter();
+                        App.initParallaxBg();
+                        OwlCarousel.initOwlCarousel();
+                        RevolutionSlider.initRSfullScreen();
+                    });
+                    function scrollToTop() {
+                        $('body,html').animate({
+                            scrollTop: 0
+                        }, 1000);
+                        return false;
+                    }
+              {#      (function (i, s, o, g, r, a, m) {
+                        i['GoogleAnalyticsObject'] = r;
+                        i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments);
+                        }, i[r].l = 1 * new Date();
+                        a = s.createElement(o),
+                                m = s.getElementsByTagName(o)[0];
+                        a.async = 1;
+                        a.src = g;
+                        m.parentNode.insertBefore(a, m);
+                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                    ga('create', 'UA-66868406-1', 'auto');
+                    ga('send', 'pageview');#}
+            </script>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es"> 
+    <head>
+        <title>Madrid Student Welcome Day</title>
+
+        {# Meta #}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Acto de bienvenida oficial de la ciudad Madrid a todos los estudiantes - MSWD">
+        <meta name="author" content="MSWD">
+
+        {# Favicon #}
+        <link rel="shortcut icon" href="favicon.ico">
+
+        {% block stylesheets %}
+            {# CSS Global Compulsory #}
+            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/ticket.css') }}">
+        {% endblock %}
+    </head>
+
+    <body>
+        <div id="ticket" style="background-image: url('{{ asset('bundles/swdmadrid/src/img/ticket_mswd_min.png') }}')">
+            <div class="lateral">
+                <div class="textoLateralIzq">
+                    nº {{ numeroEntrada }}
+                </div>
+            </div>
+            <div class="centro">
+                <center>
+                    {{ participante.nombre ~ ' ' ~ participante.apellidos }}<br/>
+                    {{ participante.email }}
+                </center>
+            </div>
+            <div class="contenedorQr">
+                <img src="{{ qrcode_url(url('comprobarParticipante', {'id': participante.id})) }}" />
+            </div>
+            <div class="lateral">
+                <div class="textoLateralDer">
+                    nº {{ numeroEntrada }}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

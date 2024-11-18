@@ -1,0 +1,190 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+
+{% block content %}
+    <section id="img-superior" class="container-fluid azulito">
+        <img class="crop" src="{{ asset('bundles/swdmadrid/src/img/superior.jpg') }}">
+        <div id="social-cabecera">
+            <a href="{{ youtube_url }}" data-original-title="Youtube" target="_blank">
+                <i class="fa fa-youtube-square"></i>
+            </a>
+            <a href="{{ facebook_url }}" data-original-title="Facebook" target="_blank">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+        </div>
+        <div id="mensaje-aluni-cabecera">
+            <h1 class="font-normal">Este evento es una creación original de <a class="inverso" href="https://www.aluni.net">Aluni.Net</a></h1>
+        </div>
+    </section>
+    <div class="margin-bottom-40"></div>
+    <section id="datos" class="container-fluid">
+        <div class="block">
+            <div class="col-sm-4 col-xs-12">
+                <div class="col-xs-4 margin-bottom-40">
+                    <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/info-1.png') }}">
+                </div>
+                <div class="col-xs-8">
+                    <p class="texto-importante">
+                        The Student Welcome Day is an event for discovering the ample resources, surprises, services, and cultural and leisure activities that Madrid has to offer you.
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="col-xs-4 margin-bottom-40">
+                    <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/info-2.png') }}">
+                </div>
+                <div class="col-xs-8">
+                    <p class="texto-importante">
+                        It will take place the Saturday 25th of September, from 11:00 to 19:00. Admission is free, but you have to sign up on this web.
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="col-xs-4 margin-bottom-40">
+                    <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/info-3.png') }}">
+                </div>
+                <div class="col-xs-8">
+                    <p class="texto-importante">
+                        It will be held at the very heart of Madrid, at the Town Hall (Plaza Cibeles). Metro Banco de España (<a href="https://drive.google.com/open?id=1V1onWzgrBER1UUaN1UymzoSIhHI&usp=sharing" target="_blank">see map</a>).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid azulito">
+        <section id="inscripcion" class="container">
+            <h2>Inscripción <span class="inverso">| Sign Up</span>:</h2>
+            <p>La inscripción al evento es completamente gratuita (ENTRADA ES GRATUITA PARA TODOS LOS QUE SE REGISTREN ONLINE). Al guardar tus datos aceptas nuestra política de privacidad y recibirás un email de validación para poder descargar tu ticket de entrada <span class="inverso">| Signing up for the event is completely free (FREE ENTRANCE UPON ONLINE REGISTRATION). When you save your data you accept our private policy and you will receive an email validation to download your entrance ticket</span></p>
+            <div class="row">
+                {% include 'SWDMadridBundle:Default:formularioInscripcion.html.twig' %}
+            </div>
+        </section>
+        <div class="margin-bottom-40"></div>
+    </div>
+    <section id="videos" class="container">
+        <h2>Vídeos <span class="inverso">| Videos</span>:</h2>
+        <div class="row margin-bottom-30">
+            <div class="col-xs-12">
+                <div class="item col-md-4" >
+                    <iframe class="marco-video img-responsive margin-bottom-40" width="800" height="600" src="https://www.youtube.com/embed/cqoSI3tEC_c" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="item col-md-4">
+                    <iframe class="marco-video img-responsive margin-bottom-40" width="800" height="600" src="https://www.youtube.com/embed/3fvxWasz-qE" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="item col-md-4">
+                    <iframe class="marco-video img-responsive margin-bottom-40" width="800" height="600" src="https://www.youtube.com/embed/W3q8Ps_68tk" frameborder="0" allowfullscreen></iframe>
+                    <div class="float-right">
+                        <a class="inverso" href="https://www.youtube.com/channel/UCBiI2LdDJUOWRqFoY4dIrkw/videos" target="_blank">
+                            Ver más vídeos (click aquí)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+    </section>
+    <div class="container-fluid azulito">
+        <section id="carta" class="container">
+            <h2>Carta del Alcalde <span class="inverso">| Major Welcome Letter</span>:</h2>
+            <p>Carta de bienvenida del alcalde a todos los estudiantes <span class="inverso">| Welcome letter from the mayor to all students</span></p>
+            <div class="block">
+                <div class="col-sm-4 col-sm-offset-0 col-xs-8 col-xs-offset-2 margin-top-20">
+                    <center>
+                        <h4>Español <span class="inverso">| Spanish</span></h4>
+                    </center>
+                    <a href="{{ asset('bundles/swdmadrid/src/img/carta_es.jpg') }}" target="_blank">
+                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/carta_es_mini.jpg') }}">
+                    </a>
+                </div>
+                <div class="col-sm-4 col-sm-offset-0 col-xs-8 col-xs-offset-2 margin-top-20">
+                    <center>
+                        <h4>Inglés <span class="inverso">| English</span></h4>
+                    </center>
+                    <a href="{{ asset('bundles/swdmadrid/src/img/carta_en.jpg') }}" target="_blank">
+                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/carta_en_mini.jpg') }}">
+                    </a>
+                </div>
+                <div class="col-sm-4 col-sm-offset-0 col-xs-8 col-xs-offset-2 margin-top-20">
+                    <center>
+                        <h4>Chino <span class="inverso">| Chinese</span></h4>
+                    </center>
+                    <a href="{{ asset('bundles/swdmadrid/src/img/carta_ch.jpg') }}" target="_blank">
+                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/carta_ch_mini.jpg') }}">
+                    </a>
+                </div>
+            </div>
+        </section>
+        <div class="margin-bottom-40"></div>
+    </div>
+    <section id="fotos" class="container">
+        <h2>Fotos MSWD <span class="inverso">| Photos MSWD</span>:</h2>
+        <p>Álbumes con las mejores fotos del MSWD <span class="inverso">| Album with the best photos of the MSWD</span></p>
+        {% include 'SWDMadridBundle:Default:albumes.html.twig' %}
+        {#        <div class="block">
+                    <div class='embedsocial-album' data-ref="f9e3a1b6183898b1445f36579b6a56ad52d64964"></div><script>(function (d, s, id) {
+                            var js;
+                            if (d.getElementById(id)) {
+                                return;
+                            }
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "https://embedsocial.com/embedscript/ei.js";
+                            d.getElementsByTagName("head")[0].appendChild(js);
+                        }(document, "script", "EmbedSocialScript"));</script>
+
+                </div>#}
+    </section>
+    <div class="container-fluid azulito">
+        <section class="container azulito">
+            <h2>Patrocina <span class="inverso">| Sponsor</span>:</h2>
+            <div class="block">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <a href="https://www.esmadrid.com/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-aytoMadrid.png') }}" alt=""></a>
+                </div>
+            </div>
+            <div class="margin-bottom-40"></div>
+        </section>
+
+        <div class="margin-bottom-40"></div>
+    </div>
+    <section class="container last">
+        {% include 'SWDMadridBundle:Default:organizadores.html.twig' %}
+    </section>
+{% endblock %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var urlGuardarInscripcion = "{{ url('guardarInscripcion') }}";
+        $(document).ready(function () {
+            var owl = $("#owl-demo");
+
+            owl.owlCarousel({
+                items: 3, //10 items above 1000px browser width
+                itemsDesktop: [992, 2], //5 items between 1000px and 901px
+                itemsDesktopSmall: [768, 1], // betweem 900px and 601px
+                itemsTablet: false, //2 items between 600 and 0
+                itemsMobile: false // itemsMobile disabled - inherit from itemsTablet option
+            });
+
+            // Custom Navigation Events
+            $(".next").click(function () {
+                owl.trigger('owl.next');
+            });
+            $(".prev").click(function () {
+                owl.trigger('owl.prev');
+            });
+            $(".play").click(function () {
+                owl.trigger('owl.play', 1000); //owl.play event accept autoPlay speed as second parameter
+            });
+            $(".stop").click(function () {
+                owl.trigger('owl.stop');
+            });
+        });
+    </script>
+    <script src="{{ asset('bundles/swdmadrid/src/js/formularioInscripcion.js') }}"></script>
+{% endblock %}

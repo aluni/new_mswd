@@ -1,0 +1,40 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section id="concurso" class="container">
+        <div class="col-xs-offset-2 col-xs-8">
+            <h2 class="title-divider">
+                <span>Login</span>
+            </h2>
+            <p>
+                Para entrar usa tu email y como contraseña tu número de entrada 
+                <span class="inverso">| To login use your email and your ticket number as password</span>
+            </p>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    {% if error %}
+                        <div>{{ error|trans }}</div>
+                    {% endif %}
+                    <form action="{{ url("fos_user_security_check") }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        <div class="form-group">  
+                            <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" required="required" placeholder="Usuario/Email"/>
+                        </div>
+                        <div class="form-group">  
+                            <input type="password" id="password" name="_password" class="form-control" required="required" placeholder="Contraseña/Nº de entrada"/>
+                        </div>
+                        <input type="submit" id="_submit" name="_submit" class="btn btn-estud" value="{{ 'Entrar'|trans }}" />
+                        <br/>
+                        <a href="{{ url('fos_user_resetting_request') }}">¿Has olvidado la contraseña? | Forgot your password?</span></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}

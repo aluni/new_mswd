@@ -1,0 +1,20 @@
+{% extends "SWDMadridBundle::base.html.twig" %}
+{% block navigation %}
+    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+{% endblock %}
+{% block content %}
+    <section id="concurso" class="container">
+        <h2>Participa en el Concurso de Fotografía y Vídeo<span class="inverso"> | Participate in the Photo & Video Contest</span>:</h2>
+        <div class="block">
+            <div class="col-md-6 col-md-offset-3">
+                <center>
+                    <iframe src="http://pcdn.easypromosapp.com/widget/37080?ep1=widget&ep2=embed" width="700px" height="1200px" frameborder="0"></iframe>
+                </center>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+{% endblock %}
