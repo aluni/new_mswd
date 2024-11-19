@@ -35,7 +35,7 @@ class ParticipantesRESTController extends AluniRESTController {
                 $participantes[] = $checkeo->getParticipante();
             }
         } else {
-            $participantes = $this->getDoctrine()->getRepository('SWDMadridBundle:Participante')->findAll();
+            $participantes = $this->doctrine->getRepository('SWDMadridBundle:Participante')->findAll();
         }
         return $participantes;
     }
@@ -48,7 +48,7 @@ class ParticipantesRESTController extends AluniRESTController {
      * @return Participante
      */
     public function getParticipanteAction($id) {
-        return $this->getDoctrine()->getRepository('SWDMadridBundle:Participante')->find($id);
+        return $this->doctrine->getRepository('SWDMadridBundle:Participante')->find($id);
     }
 
     /**
@@ -63,9 +63,9 @@ class ParticipantesRESTController extends AluniRESTController {
                 $request->getContent(), 
                 'App\Entity\Participante', 
                 'json');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($participante);
-        $em->flush();
+        $em = $this->doctrine->getManager();
+        $this->em->persist($participante);
+        $this->em->flush();
         return new JsonResponse(['mensaje' => "Participante $id actualizado correctamente"]);
     }
 

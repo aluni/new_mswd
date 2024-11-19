@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,12 +40,8 @@ class ActualizarParticipantesCommand extends AluniCommand {
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine.orm.entity_manager');
-        $router = $container->get('router');
-        $conn = $em->getConnection();
-        $queryP = "SELECT * FROM Participante2";
-        $participantes = $conn->executeQuery($queryP)->fetchAll();
+        $queryP = "SELECT * FROM Participante";
+        $participantes = $this->conn->executeQuery($queryP)->fetchAll();
         foreach ($participantes as $p) {
             $participante = new Participante();
             foreach ($p as $clave => $valor) {
@@ -61,10 +56,10 @@ class ActualizarParticipantesCommand extends AluniCommand {
             $participante->addRole('ROLE_PARTICIPANTE');
             $participante->setUsername($participante->getEmail());
             $participante->setPassword('1q2w3e');
-            $em->persist($participante);
-            $em->flush();
-            $container->get('fos_user.util.user_manipulator')->activate($participante->getUsername());
-            $container->get('fos_user.util.user_manipulator')->changePassword($participante->getUsername(), $participante->getNumeroEntrada());
+            $this->em->persist($participante);
+            $this->em->flush();
+            $this->userManipulator->activate($participante->getUsername());
+            $this->userManipulator->changePassword($participante->getUsername(), $participante->getNumeroEntrada());
             $random = substr($participante->getEmail(), 1, 2);
             $ficheroTicket = $container->get('kernel')->getRootDir() . '/../web/tickets/' . $random . $participante->getNumeroEntrada() . '.pdf';
             var_dump($router->generate('verTicket', ['numeroEntrada' => $participante->getNumeroEntrada()], true));

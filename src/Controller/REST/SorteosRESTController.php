@@ -35,7 +35,7 @@ class SorteosRESTController extends AluniRESTController {
                 $sorteos[] = $checkeo->getSorteo();
             }
         } else {
-            $sorteos = $this->getDoctrine()->getRepository('SWDMadridBundle:Sorteo')->findAll();
+            $sorteos = $this->doctrine->getRepository('SWDMadridBundle:Sorteo')->findAll();
         }
         return $sorteos;
     }
@@ -48,7 +48,7 @@ class SorteosRESTController extends AluniRESTController {
      * @return Sorteo
      */
     public function getSorteoAction($id) {
-        return $this->getDoctrine()->getRepository('SWDMadridBundle:Sorteo')->find($id);
+        return $this->doctrine->getRepository('SWDMadridBundle:Sorteo')->find($id);
     }
 
     /**
@@ -60,13 +60,13 @@ class SorteosRESTController extends AluniRESTController {
      */
     public function postSorteoAction(Request $request) {
         $sorteo = $this->get('jms_serializer')->deserialize($request->getContent(), 'App\Entity\Sorteo', 'json');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($sorteo);
+        $em = $this->doctrine->getManager();
+        $this->em->persist($sorteo);
         foreach ($sorteo->getParticipantes() as $participante) {
             $participante->addSorteo($sorteo);
-            $em->persist($participante);
+            $this->em->persist($participante);
         }
-        $em->flush();
+        $this->em->flush();
         return new JsonResponse(['mensaje' => "Sorteo creado correctamente"]);
     }
 
@@ -80,9 +80,9 @@ class SorteosRESTController extends AluniRESTController {
     public function putSorteoAction(Request $request, $id) {
         $sorteo = $this->get('jms_serializer')->deserialize(
                 $request->getContent(), 'App\Entity\Sorteo', 'json');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($sorteo);
-        $em->flush();
+        $em = $this->doctrine->getManager();
+        $this->em->persist($sorteo);
+        $this->em->flush();
         return new JsonResponse(['mensaje' => "Sorteo $id actualizado correctamente"]);
     }
 

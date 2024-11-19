@@ -41,7 +41,7 @@ class InstitucionesController extends AluniController {
      * @Template()
      */
     public function verInstitucionAction($alias) {
-        $institucion = $this->getDoctrine()->getRepository('SWDMadridBundle:Institucion')->findOneByAlias($alias);
+        $institucion = $this->doctrine->getRepository('SWDMadridBundle:Institucion')->findOneByAlias($alias);
         $descripcion = $this->normalizar($institucion->getDescripcion());
         $descripcion = preg_replace('/\n/', '</p><p>', $descripcion);
         $descripcion = '<p>' . $descripcion . '</p>';
@@ -58,7 +58,7 @@ class InstitucionesController extends AluniController {
         $queryInstituciones = "SELECT i.* FROM Institucion i "
                 . "INNER JOIN Usuario u ON u.id = i.id "
                 . "WHERE u.enabled=1 ORDER BY i.rango ASC, i.id ASC";
-        $instituciones = $this->get('database_connection')->executeQuery($queryInstituciones)->fetchAll();
+        $instituciones = $this->conn->executeQuery($queryInstituciones)->fetchAll();
         return $this->respuestaJSON($instituciones, 200);
     }
 
@@ -66,19 +66,19 @@ class InstitucionesController extends AluniController {
      * @Route("/comprobar-participante/{id}", name="comprobarParticipante",  defaults={"id"=""})
      */
     public function comprobarParticipanteAction($id) {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->doctrine->getManager();
         if ($this->get('seg_service')->esInstitucion()) {
-            $participante = $em->getRepository('SWDMadridBundle:Participante')->find($id);
+            $participante = $this->em->getRepository('SWDMadridBundle:Participante')->find($id);
             $this->addFlash('success', $this->getUser()->getNombre());
             if (!empty($participante)) {
-                $checkeo = $em->getRepository('SWDMadridBundle:Checkeo')->findOneBy(
+                $checkeo = $this->em->getRepository('SWDMadridBundle:Checkeo')->findOneBy(
                         ['participante' => $participante, 'institucion' => $this->getUser()]);
                 if (empty($checkeo)) {
                     $checkeo = new Checkeo();
                     $checkeo->setInstitucion($this->getUser());
                     $checkeo->setParticipante($participante);
-                    $em->persist($checkeo);
-                    $em->flush();
+                    $this->em->persist($checkeo);
+                    $this->em->flush();
                     $this->addFlash('success', "Participante checkeado!!.");
                 } else {
                     $this->addFlash('error', "Participante no válido, ya ha sido checkeado!!.");
@@ -98,17 +98,17 @@ class InstitucionesController extends AluniController {
      * @Route("/checkear-participante/{email}", name="checkearParticipante",  defaults={"email"=""})
      */
     public function checkearParticipanteAction($email) {
-        $em = $this->getDoctrine()->getManager();
-        $participante = $em->getRepository('SWDMadridBundle:Participante')->findOneByEmail($email);
+        $em = $this->doctrine->getManager();
+        $participante = $this->em->getRepository('SWDMadridBundle:Participante')->findOneByEmail($email);
         if (!empty($participante)) {
-            $checkeo = $em->getRepository('SWDMadridBundle:Checkeo')->findOneBy(
+            $checkeo = $this->em->getRepository('SWDMadridBundle:Checkeo')->findOneBy(
                     ['participante' => $participante, 'institucion' => $this->getUser()]);
             if (empty($checkeo)) {
                 $checkeo = new Checkeo();
                 $checkeo->setInstitucion($this->getUser());
                 $checkeo->setParticipante($participante);
-                $em->persist($checkeo);
-                $em->flush();
+                $this->em->persist($checkeo);
+                $this->em->flush();
                 return $this->respuestaJSON(["Participante checkeado!!."], 200);
             } else {
                 return $this->respuestaJSON(["Participante no válido, ya ha sido checkeado!!."], 422);
@@ -123,7 +123,7 @@ class InstitucionesController extends AluniController {
      * @Route("/descargar-checkeados", name="descargarCheckeados")
      */
     public function descargarCheckeadosAction() {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->doctrine->getManager();
         $checkeos = $this->getUser()->getCheckeos();
         $participantes = [];
         $csvstring = ('"Nº entrada";"Nombre completo";"Email";"Nacionalidad";"Sexo";"Universidad";"¿Cómo ha conocido el evento?"' . "\n");

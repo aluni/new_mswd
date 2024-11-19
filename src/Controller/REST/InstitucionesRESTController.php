@@ -35,7 +35,7 @@ class InstitucionesRESTController extends AluniRESTController {
                 $instituciones[] = $checkeo->getInstitucion();
             }
         } else {
-            $instituciones = $this->getDoctrine()->getRepository('SWDMadridBundle:Institucion')->findByEnabled(1);
+            $instituciones = $this->doctrine->getRepository('SWDMadridBundle:Institucion')->findByEnabled(1);
         }
         return $instituciones;
     }
@@ -48,7 +48,7 @@ class InstitucionesRESTController extends AluniRESTController {
      * @return Institucion
      */
     public function getInstitucionAction($id) {
-        return $this->getDoctrine()->getRepository('SWDMadridBundle:Institucion')->find($id);
+        return $this->doctrine->getRepository('SWDMadridBundle:Institucion')->find($id);
     }
 
 }

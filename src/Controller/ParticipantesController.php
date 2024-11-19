@@ -33,12 +33,12 @@ class ParticipantesController extends AluniController {
         $participante->setUsername($participante->getEmail());
         $participante->setPassword('1q2w3e');
         $participante->setHoraEntrada(date_create());
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($participante);
-        $em->flush();
+        $em = $this->doctrine->getManager();
+        $this->em->persist($participante);
+        $this->em->flush();
         $numeroEntrada = $this->generarNumeroEntrada($participante);
         $participante->setNumeroEntrada($numeroEntrada);
-        $em->flush();
+        $this->em->flush();
         $nombreCompleto = $participante->getNombre() . ' ' . $participante->getApellidos();
         $titulo = "$nombreCompleto we welcome you to the MSWD!";
         $email = $participante->getEmail();
@@ -59,8 +59,8 @@ class ParticipantesController extends AluniController {
      * @Route("/validarParticipante/{numeroEntrada}", name="validarParticipante")
      */
     public function validarParticipanteAction($numeroEntrada) {
-        $em = $this->getDoctrine()->getManager();
-        $participante = $em->getRepository('SWDMadridBundle:Participante')->findOneByNumeroEntrada($numeroEntrada);
+        $em = $this->doctrine->getManager();
+        $participante = $this->em->getRepository('SWDMadridBundle:Participante')->findOneByNumeroEntrada($numeroEntrada);
         if (empty($participante)) {
             throw new AccessDeniedHttpException('Acceso no permitido');
         }
@@ -84,7 +84,7 @@ class ParticipantesController extends AluniController {
         $adjuntos = [];
         $adjuntos[] = $ficheroTicket;
         $this->enviarEmail($plantilla, $titulo, 'info@studentwelcomeday.com', $email, $adjuntos);
-        $em->flush();
+        $this->em->flush();
         $this->addFlash('success', "Tu email has sido validado, recibirás otro email con tu ticket de entrada. | "
                 . "You have been validated, you will receive another email with the ticket");
         return $this->redirect($this->generateUrl('home'));
@@ -95,8 +95,8 @@ class ParticipantesController extends AluniController {
      * @Template()
      */
     public function verTicketAction($numeroEntrada) {
-        $em = $this->getDoctrine()->getManager();
-        $participante = $em->getRepository('SWDMadridBundle:Participante')->findOneByNumeroEntrada($numeroEntrada);
+        $em = $this->doctrine->getManager();
+        $participante = $this->em->getRepository('SWDMadridBundle:Participante')->findOneByNumeroEntrada($numeroEntrada);
         if (empty($participante)) {
             throw new AccessDeniedHttpException('Acceso no permitido');
         }

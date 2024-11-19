@@ -4,12 +4,11 @@
 
 namespace App\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Entity\Institucion;
 
 /**
  * Actualiza los entrada de actividades desde Blogger. Este comando hace una petición HTTP a la API
@@ -28,7 +27,7 @@ class ActualizarInstitucionesCommand extends AluniCommand {
      * mantener anteriores mantiene los entrada ya existentes que hayamos importado en ocasiones
      * anteriores, en caso de no incluirla los sobreescribirá.
      */
-    protected function configure() {
+    protected function configure(): void {
         $this->setName('swd:actualizar_instituciones')
                 ->setDescription('Actualiza las noticias, trayendose todos las entradas de blogger desde ayer o desde la fecha deseada.')
                 ->addArgument('id', InputArgument::OPTIONAL, '¿Id de la institucion?')
@@ -41,19 +40,17 @@ class ActualizarInstitucionesCommand extends AluniCommand {
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine.orm.entity_manager');
-        $router = $container->get('router');
-        $conn = $em->getConnection();
-        $instituciones = $em->getRepository('SWDMadridBundle:Institucion')->findByEnabled(1);
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+        $instituciones = $this->em->getRepository('SWDMadridBundle:Institucion')->findBy(['enabled' => 1]);
         foreach ($instituciones as $institucion) {
             $alias = $institucion->getAlias();
             $pass = 'mswd' . substr($alias, -2) . substr($alias, 0, 2);
-            $container->get('fos_user.util.user_manipulator')->changePassword($institucion->getUsername(), $pass);
+            $this->userManipulator->changePassword($institucion->getUsername(), $pass);
             $output->writeln("<info>" . $institucion->getNombre() . " - Usuario: $alias - Contraseña: $pass</info>");
         }
+        return Command::SUCCESS;
     }
 
 }

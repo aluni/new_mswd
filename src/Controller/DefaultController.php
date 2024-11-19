@@ -21,8 +21,8 @@ class DefaultController extends AluniController {
      */
     public function indexAction(Request $request) {
         $cc = $request->query->get('cc');
-        $paises = $this->getDoctrine()->getRepository('SWDMadridBundle:Pais')->findAll();
-        $comoConoce = $this->getDoctrine()->getRepository('SWDMadridBundle:ComoConoce')->findBy([], ['comoConoce' => 'ASC']);
+        $paises = $this->doctrine->getRepository('SWDMadridBundle:Pais')->findAll();
+        $comoConoce = $this->doctrine->getRepository('SWDMadridBundle:ComoConoce')->findBy([], ['comoConoce' => 'ASC']);
         return ['paises' => $paises, 'comoConoce' => $comoConoce, 'cc' => $cc];
     }
 
@@ -77,7 +77,7 @@ class DefaultController extends AluniController {
      * @Template
      */
     public function listaGanadoresAction() {
-        $sorteos = $this->getDoctrine()->getRepository('SWDMadridBundle:Sorteo')->findAll();
+        $sorteos = $this->doctrine->getRepository('SWDMadridBundle:Sorteo')->findAll();
         return ['sorteos' => $sorteos];
     }
 

@@ -27,15 +27,15 @@ class AdminController extends AluniController {
      * @Template
      */
     public function listaParticipantesAction() {
-        $paises = $this->get('database_connection')->executeQuery('SELECT es FROM Pais')->fetchAll(\PDO::FETCH_COLUMN);
+        $paises = $this->conn->executeQuery('SELECT es FROM Pais')->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($paises as $i => $pais) {
             $paises[$pais] = $pais;
             unset($paises[$i]);
         }
         $formFiltrosParticipante = $this->createForm(new ParticipanteFiltrosType($paises));
-        $paises = $this->getDoctrine()->getRepository('SWDMadridBundle:Pais')->findAll();
+        $paises = $this->doctrine->getRepository('SWDMadridBundle:Pais')->findAll();
         $formSorteo = $this->createForm(new SorteoType());
-        $comoConoce = $this->getDoctrine()->getRepository('SWDMadridBundle:ComoConoce')->findBy([], ['comoConoce' => 'ASC']);
+        $comoConoce = $this->doctrine->getRepository('SWDMadridBundle:ComoConoce')->findBy([], ['comoConoce' => 'ASC']);
         return ['paises' => $paises,
             'comoConoce' => $comoConoce,
             'formFiltrosParticipante' => $formFiltrosParticipante->createView(),
@@ -50,7 +50,7 @@ class AdminController extends AluniController {
      * @Template
      */
     public function sorteosAction() {
-        $paises = $this->get('database_connection')->executeQuery('SELECT es FROM Pais')->fetchAll(\PDO::FETCH_COLUMN);
+        $paises = $this->conn->executeQuery('SELECT es FROM Pais')->fetchAll(\PDO::FETCH_COLUMN);
         foreach ($paises as $i => $pais) {
             $paises[$pais] = $pais;
             unset($paises[$i]);
@@ -71,11 +71,11 @@ class AdminController extends AluniController {
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateParticipanteAction(Request $request, $id) {
-        $participante = $this->getDoctrine()->getRepository('SWDMadridBundle:Participante')->find($id);
+        $participante = $this->doctrine->getRepository('SWDMadridBundle:Participante')->find($id);
         $datosParticipante = json_decode($request->getContent(), true);
         $participante->setAsistido($datosParticipante['asistido']);
         $participante->setSorteo($datosParticipante['sorteo']);
-        $this->getDoctrine()->getManager()->flush();
+        $this->doctrine->getManager()->flush();
         return $this->respuestaJSON(['mensaje' => 'Guardado correctamente'], 200);
     }
 

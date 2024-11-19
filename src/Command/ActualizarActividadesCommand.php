@@ -2,14 +2,14 @@
 
 namespace App\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Actualiza los entrada de actividades desde Blogger. Este comando hace una petición HTTP a la API 
+ * Actualiza las entradas de actividades desde Blogger. Este comando hace una petición HTTP a la API
  * de Blogger de Google para pedir un listado de entradas en formato json desde la fecha que 
  * indiquemos. Estas entradas de actividades se guardarán en una carpeta del proyecto definida por
  * configuración, y serán las que se muestren en la web.
@@ -22,10 +22,10 @@ class ActualizarActividadesCommand extends AluniCommand {
     /**
      * El comando recibe un argumento que es opcional(fecha), en caso de que este argumento no se
      * incluya se entenderá que se quieren pedir todas las entradas del último año. La opción de 
-     * mantener anteriores mantiene los entrada ya existentes que hayamos importado en ocasiones
+     * mantener anteriores mantiene las entradas ya existentes que hayamos importado en ocasiones
      * anteriores, en caso de no incluirla los sobreescribirá.
      */
-    protected function configure() {
+    protected function configure(): void {
         $this->setName('swd:actualizar_noticias')
                 ->setDescription('Actualiza las noticias, trayendose todos las entradas de blogger desde ayer o desde la fecha deseada.')
                 ->addArgument('fecha', InputArgument::OPTIONAL, '¿Desde que fecha?')
@@ -35,15 +35,15 @@ class ActualizarActividadesCommand extends AluniCommand {
     /**
      * Función principal que pide las entradas a la API de Blogger y actualiza el archivo de
      * actividades de la web
-     * 
+     *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
-        $container = $this->getContainer();
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $fecha = $this->prepararFecha($input->getArgument('fecha'));
-        $key = $container->getParameter('googleAPIkeyServer');
-        $blogId = $container->getParameter('blogId');
+        $key = $this->params->get('googleAPIkeyServer');
+        $blogId = $this->params->get('blogId');
         $url = "https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$key&status=live&startDate=$fecha&maxResults=50";
         $entradasBlogger = $this->getEntradas($url);
         $data = json_decode($entradasBlogger);
@@ -52,12 +52,13 @@ class ActualizarActividadesCommand extends AluniCommand {
             foreach ($entradas as &$entrada) {
                 $this->prepararEntrada($entrada);
             }
-            $ficheroEntradas = $container->getParameter('directorioEntradasBlogs') . '/mswd-noticias.json';
+            $ficheroEntradas = $this->params->get('directorioEntradasBlogs') . '/mswd-noticias.json';
             $this->guardarEntradas($ficheroEntradas, $input->getOption('mantenerAnteriores'), $entradas);
             $output->writeln("<info>¡Entradas del blog desde $fecha importados correctamente!</info>");
         } else {
             $output->writeln("<comment>No hay nuevos entradas desde $fecha</comment>");
         }
+        return Command::SUCCESS;
     }
 
     /**
@@ -68,7 +69,7 @@ class ActualizarActividadesCommand extends AluniCommand {
      * @param string $fecha
      * @return string
      */
-    private function prepararFecha($fecha) {
+    private function prepararFecha(string $fecha): string {
         if (empty($fecha)) {
             $dt = new \DateTime();
             $dt->setTimestamp(strtotime("today -1 year"));
@@ -85,7 +86,7 @@ class ActualizarActividadesCommand extends AluniCommand {
      * @param string $url
      * @return string
      */
-    private function getEntradas($url) {
+    private function getEntradas(string $url): string {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -98,7 +99,7 @@ class ActualizarActividadesCommand extends AluniCommand {
 
     /**
      * Puesto que la información que devuelve Google a la petición a la API de Blogger es muy amplia
-     * necesitamos filtrarla y quedarnos con las partes que nos interesan. Además necesitamos buscar
+     * necesitamos filtrarla y quedarnos con las partes que nos interesan. Además, necesitamos buscar
      * y extraer la primera imagen de la entrada para asi poder mostrarla en otros sitios, como en
      * el listado de actividades de cada ciudad.
      * 
@@ -116,7 +117,7 @@ class ActualizarActividadesCommand extends AluniCommand {
         if (!empty($coincidencias[1][0])) {
             $entrada->image = $coincidencias[1][0];
         } else {
-            $entrada->image = 'http://www.aluni.net/uploads/buscador/aluni_logo_para_pc_gris.jpg';
+            $entrada->image = 'https://www.aluni.net/uploads/buscador/aluni_logo_para_pc_gris.jpg';
         }
     }
 
@@ -128,7 +129,7 @@ class ActualizarActividadesCommand extends AluniCommand {
      * @param boolean $mantenerAnteriores
      * @param array $entradas
      */
-    private function guardarEntradas($fichero, $mantenerAnteriores, $entradas) {
+    private function guardarEntradas(string $fichero, bool $mantenerAnteriores, array $entradas): void {
         if ($mantenerAnteriores && file_exists($fichero)) {
             $readHandle = fopen($fichero, 'r') or die('No se ha podido abrir el fichero:  ' . $fichero); //open file for writing ('w','r','a')...
             $str = fread($readHandle, filesize($fichero));
