@@ -1,7 +1,7 @@
-{% extends "SWDMadridBundle::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+    {% include Nav:menu-simple.html.twig::class %}
 {% endblock %}
 
 {% block content %}
@@ -12,14 +12,14 @@
             </center>
         </div>
         <div id="listadoAngular" ng-controller="Blog">
-            {% include 'SWDMadridBundle:Blog:listadoEntradas/col_categorias.html.twig' %}
-            {% include 'SWDMadridBundle:Blog:listadoEntradas/col_entradas.html.twig' %}
+            {% include Blog:listadoEntradas/col_categorias.html.twig::class %}
+            {% include Blog:listadoEntradas/col_entradas.html.twig::class %}
         </div>
     </div>
 {% endblock content %}
 
 {% block custom_stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mswd-estud.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -34,8 +34,8 @@
     <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
     <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
     {# Aplicación del Blog #} 
-    <script src="{{ asset('bundles/swdmadrid/src/js/funciones_aux.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/src/js/blogApp/blogFilters.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/src/js/blogApp/blogControllers.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/src/js/blogApp/blogApp.js') }}"></script>
+    <script src="{{ asset('js/funciones_aux.js') }}"></script>
+    <script src="{{ asset('js/blogApp/blogFilters.js') }}"></script>
+    <script src="{{ asset('js/blogApp/blogControllers.js') }}"></script>
+    <script src="{{ asset('js/blogApp/blogApp.js') }}"></script>
 {% endblock %}

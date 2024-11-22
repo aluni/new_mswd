@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block navigation %}
+    {% include Nav:menu-simple.html.twig::class %}
+{% endblock %}
+
+{% form_theme formFiltrosParticipante Form:fields.html.twig::class %}
+{% form_theme formSorteo Form:fields.html.twig::class %}
+
+{% block content %}
+    <div ng-app="participantesApp" class="container-fluid last margin-top-20">
+        <div id="mensajeEspera" class="row">
+            <div style="text-align: center;">
+                <h3><i class="fa fa-spinner fa-spin"></i> Cargando <span class="inverso">| Loading ...</span></h3>
+            </div>
+        </div>
+        <div class="seccionAngular" ng-controller="Participantes" style="display: none">
+            {% if is_granted('ROLE_ADMIN') %}
+                <h3>Lanzar Sorteo</h3>
+                {% include Admin:Sorteos/formularioSorteo.html.twig::class %}
+                {% include Admin:Sorteos/ganadores.html.twig::class %}
+                <br>
+            {% endif %}
+            <h3>Lista de Registrados{% if is_granted('ROLE_INSTITUCION') %} en {{ app.user.nombre }} - (<a target="_blank" href="https://docs.google.com/document/d/1rWzfIElksmhhYZLtHQivkk5ROaaQU7K2uBckMMMRKTY/edit?usp=sharing">ayuda</a>){% endif %}</h3>
+            {% if is_granted('ROLE_INSTITUCION') %}
+                {% include Admin:ListaParticipantes/formularioCheckear.html.twig::class %}
+                <h4>¡[[ participantes.length ]] participantes checkeados!</h4>
+            {% endif %}
+            {% include Admin:ListaParticipantes/mensajes.html.twig::class %}
+            {% include Admin:ListaParticipantes/filtro.html.twig::class %}
+            {% include Admin:ListaParticipantes/lista.html.twig::class %}
+            {% if is_granted('ROLE_EMPLEADO') %}
+                <div class="block">
+                    {% include Default:formularioInscripcion.html.twig::class %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block custom_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/mswd-estud.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var participantesREST = "{{ url('get_participantes') }}";
+        var sorteosREST = "{{ url('get_sorteos') }}";
+        var urlGuardarInscripcion = "{{ url('guardarInscripcion') }}";
+        var checkearParticipanteURL = "{{ url('checkearParticipante') }}";
+        var asistido = 1;
+    </script>
+    {% block importmap %}{{ importmap('angular_app') }}{% endblock %}
+{% endblock %}

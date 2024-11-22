@@ -7,7 +7,7 @@ fos_user:
         address:  apli@aluni.net
         sender_name:    Aluni.net
     service:
-        mailer: App\Services\UsersMailer
+        mailer: 'fos_user.mailer.noop'
     registration:
         confirmation:
             from_email:

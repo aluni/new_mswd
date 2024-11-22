@@ -2,13 +2,9 @@
 
 namespace App\Controller\REST;
 
-
-use Doctrine\Common\Collections\Collection;
-use FOS\RestBundle\Controller\Annotations\Route;
-use FOS\RestBundle\Controller\Annotations\View;
-
+use App\Entity\Institucion;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Controlador encargado del servicio REST de instituciones de s. Usa funcionalidades del FOSRestBundle (creación de 
@@ -17,25 +13,24 @@ use Symfony\Component\HttpFoundation\Request;
  * 
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
- * @Route("/instituciones")
  */
 class InstitucionesRESTController extends AluniRESTController {
 
     /**
-     * @View(serializerGroups={"lista-instituciones"})
+     * @Rest\View(serializerGroups={"lista-instituciones"})
+     * @Rest\Get("/instituciones", name="get_instituciones")
      * @Security("has_role('ROLE_PARTICIPANTE') || has_role('ROLE_EMPLEADO')")
-     * @param Request $request
-     * @return Collection
+     * @return array|Institucion[]|object[]
      */
-    public function getInstitucionesAction(Request $request) {
-        if($this->get('seg_service')->esParticipante()){
+    public function getInstitucionesAction(): array {
+        if($this->seguridad->esParticipante()){
             $checkeos = $this->getUser()->getCheckeos();
             $instituciones = [];
             foreach($checkeos as $checkeo) {
                 $instituciones[] = $checkeo->getInstitucion();
             }
         } else {
-            $instituciones = $this->doctrine->getRepository('SWDMadridBundle:Institucion')->findByEnabled(1);
+            $instituciones = $this->doctrine->getRepository(Institucion::class)->findBy(['enabled' => 1]);
         }
         return $instituciones;
     }
@@ -43,12 +38,13 @@ class InstitucionesRESTController extends AluniRESTController {
     /**
      * Devuelve una institucion determinada en formato json.
      *
-     * @View()
+     * @Rest\View()
+     * @Rest\Get("/instituciones/{id}")
      * @param integer $id
      * @return Institucion
      */
-    public function getInstitucionAction($id) {
-        return $this->doctrine->getRepository('SWDMadridBundle:Institucion')->find($id);
+    public function getInstitucionAction(int $id): Institucion {
+        return $this->doctrine->getRepository(Institucion::class)->find($id);
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -86,7 +87,7 @@ class Participante extends Usuario {
     private $asistido = false;
     
     /**
-     * @var time
+     * @var DateTime
      *
      * @ORM\Column(name="hora_entrada", type="time")
      * @Serializer\Groups({"lista-participantes"})
@@ -309,11 +310,11 @@ class Participante extends Usuario {
     /**
      * Add sorteo
      *
-     * @param \App\Entity\Sorteo $sorteo
+     * @param Sorteo $sorteo
      *
      * @return Participante
      */
-    public function addSorteo(\App\Entity\Sorteo $sorteo)
+    public function addSorteo(Sorteo $sorteo)
     {
         $this->sorteos[] = $sorteo;
 
@@ -323,9 +324,9 @@ class Participante extends Usuario {
     /**
      * Remove sorteo
      *
-     * @param \App\Entity\Sorteo $sorteo
+     * @param Sorteo $sorteo
      */
-    public function removeSorteo(\App\Entity\Sorteo $sorteo)
+    public function removeSorteo(Sorteo $sorteo)
     {
         $this->sorteos->removeElement($sorteo);
     }
@@ -343,11 +344,11 @@ class Participante extends Usuario {
     /**
      * Add checkeo
      *
-     * @param \App\Entity\Checkeo $checkeo
+     * @param Checkeo $checkeo
      *
      * @return Participante
      */
-    public function addCheckeo(\App\Entity\Checkeo $checkeo)
+    public function addCheckeo(Checkeo $checkeo)
     {
         $this->checkeos[] = $checkeo;
 
@@ -357,9 +358,9 @@ class Participante extends Usuario {
     /**
      * Remove checkeo
      *
-     * @param \App\Entity\Checkeo $checkeo
+     * @param Checkeo $checkeo
      */
-    public function removeCheckeo(\App\Entity\Checkeo $checkeo)
+    public function removeCheckeo(Checkeo $checkeo)
     {
         $this->checkeos->removeElement($checkeo);
     }
@@ -381,12 +382,11 @@ class Participante extends Usuario {
     /**
      * Set horaEntrada
      *
-     * @param \Time $horaEntrada
+     * @param DateTime $horaEntrada
      *
-     * @return HoraEntrada
+     * @return Participante
      */
-    public function setHoraEntrada($horaEntrada)
-    {
+    public function setHoraEntrada(DateTime $horaEntrada): static {
         $this->horaEntrada = $horaEntrada;
 
         return $this;
@@ -395,7 +395,7 @@ class Participante extends Usuario {
     /**
      * Get horaEntrada
      *
-     * @return \Time
+     * @return DateTime
      */
     public function getHoraEntrada()
     {

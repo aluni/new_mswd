@@ -51,7 +51,6 @@ class ActualizarParticipantesCommand extends AluniCommand {
                 }
             }
             $participante->setComoConoce($p['como_conoce']);
-            $participante->setParticipaSorteos($p['participa_sorteos']);
             $participante->setNumeroEntrada($p['numero_entrada']);
             $participante->addRole('ROLE_PARTICIPANTE');
             $participante->setUsername($participante->getEmail());
@@ -61,12 +60,12 @@ class ActualizarParticipantesCommand extends AluniCommand {
             $this->userManipulator->activate($participante->getUsername());
             $this->userManipulator->changePassword($participante->getUsername(), $participante->getNumeroEntrada());
             $random = substr($participante->getEmail(), 1, 2);
-            $ficheroTicket = $container->get('kernel')->getRootDir() . '/../web/tickets/' . $random . $participante->getNumeroEntrada() . '.pdf';
-            var_dump($router->generate('verTicket', ['numeroEntrada' => $participante->getNumeroEntrada()], true));
+            $ficheroTicket = $this->params->get('kernel.project_dir') . '/public/tickets/' . $random . $participante->getNumeroEntrada() . '.pdf';
+            var_dump($this->router->generate('verTicket', ['numeroEntrada' => $participante->getNumeroEntrada()], true));
             var_dump($ficheroTicket);
-            if (!file_exists($ficheroTicket)) {
-                //$container->get('knp_snappy.pdf')->generate($router->generate('verTicket', ['numeroEntrada' => $participante->getNumeroEntrada()], true), $ficheroTicket);
-            }
+//            if (!file_exists($ficheroTicket)) {
+//                //$container->get('knp_snappy.pdf')->generate($router->generate('verTicket', ['numeroEntrada' => $participante->getNumeroEntrada()], true), $ficheroTicket);
+//            }
             $output->writeln("<info>¡Participante " . $participante->getId() . " añadido!</info>");
         }
     }

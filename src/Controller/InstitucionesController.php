@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 
+use App\Entity\Institucion;
+use App\Entity\Participante;
+use JetBrains\PhpStorm\NoReturn;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Serializer;
@@ -23,7 +26,7 @@ class InstitucionesController extends AluniController {
      * @Route("/", name="instituciones")
      * @Template()
      */
-    public function institucionesAction() {
+    public function institucionesAction(): array {
         return [];
     }
 
@@ -31,7 +34,7 @@ class InstitucionesController extends AluniController {
      * @Route("/lista-instituciones", name="lista_instituciones")
      * @Template()
      */
-    public function listaInstitucionesAction() {
+    public function listaInstitucionesAction(): array {
         $institucionesREST = $this->generateUrl('institucionesREST');
         return ['institucionesREST' => $institucionesREST];
     }
@@ -40,24 +43,22 @@ class InstitucionesController extends AluniController {
      * @Route("/ver-institucion/{alias}", name="ver_institucion", defaults={"alias"=""})
      * @Template()
      */
-    public function verInstitucionAction($alias) {
-        $institucion = $this->doctrine->getRepository('SWDMadridBundle:Institucion')->findOneByAlias($alias);
+    public function verInstitucionAction($alias): array {
+        $institucion = $this->doctrine->getRepository(Institucion::class)->findOneBy(['alias' => $alias]);
         $descripcion = $this->normalizar($institucion->getDescripcion());
         $descripcion = preg_replace('/\n/', '</p><p>', $descripcion);
         $descripcion = '<p>' . $descripcion . '</p>';
-        $descripcion = preg_replace('!(http|ftp|scp)(s)?:\/\/[a-zA-Z0-9\-.?&_/]+!', "<a href=\"\\0\">\\0</a>", $descripcion);
+        $descripcion = preg_replace('!(http|ftp|scp)(s)?://[a-zA-Z0-9\-.?&_/]+!', '<a href="$1">$1</a>', $descripcion);
         $institucion->setDescripcion($descripcion);
         return ['institucion' => $institucion];
     }
-
     /**
-     * @Route("/convenios", requirements={"_format"="json"}, name="institucionesREST")
-     * @Method({"GET"})
+     * @Route("/convenios", requirements={"_format"="json"}, name="institucionesREST", methods={"GET"})
      */
-    public function readInstitucionesCollectionAction() {
+    public function readInstitucionesCollectionAction(): Response {
         $queryInstituciones = "SELECT i.* FROM Institucion i "
                 . "INNER JOIN Usuario u ON u.id = i.id "
-                . "WHERE u.enabled=1 ORDER BY i.rango ASC, i.id ASC";
+                . "WHERE u.enabled=1 ORDER BY i.rango, i.id";
         $instituciones = $this->conn->executeQuery($queryInstituciones)->fetchAll();
         return $this->respuestaJSON($instituciones, 200);
     }
@@ -65,13 +66,13 @@ class InstitucionesController extends AluniController {
     /**
      * @Route("/comprobar-participante/{id}", name="comprobarParticipante",  defaults={"id"=""})
      */
-    public function comprobarParticipanteAction($id) {
-        $em = $this->doctrine->getManager();
-        if ($this->get('seg_service')->esInstitucion()) {
-            $participante = $this->em->getRepository('SWDMadridBundle:Participante')->find($id);
+    public function comprobarParticipanteAction($id): RedirectResponse {
+        
+        if ($this->seguridad->esInstitucion()) {
+            $participante = $this->em->getRepository(Participante::class)->find($id);
             $this->addFlash('success', $this->getUser()->getNombre());
             if (!empty($participante)) {
-                $checkeo = $this->em->getRepository('SWDMadridBundle:Checkeo')->findOneBy(
+                $checkeo = $this->em->getRepository(Checkeo::class)->findOneBy(
                         ['participante' => $participante, 'institucion' => $this->getUser()]);
                 if (empty($checkeo)) {
                     $checkeo = new Checkeo();
@@ -97,11 +98,11 @@ class InstitucionesController extends AluniController {
      * @Security("has_role('ROLE_INSTITUCION')")
      * @Route("/checkear-participante/{email}", name="checkearParticipante",  defaults={"email"=""})
      */
-    public function checkearParticipanteAction($email) {
-        $em = $this->doctrine->getManager();
-        $participante = $this->em->getRepository('SWDMadridBundle:Participante')->findOneByEmail($email);
+    public function checkearParticipanteAction($email): Response {
+        
+        $participante = $this->em->getRepository(Participante::class)->findOneByEmail($email);
         if (!empty($participante)) {
-            $checkeo = $this->em->getRepository('SWDMadridBundle:Checkeo')->findOneBy(
+            $checkeo = $this->em->getRepository(Checkeo::class)->findOneBy(
                     ['participante' => $participante, 'institucion' => $this->getUser()]);
             if (empty($checkeo)) {
                 $checkeo = new Checkeo();
@@ -122,8 +123,8 @@ class InstitucionesController extends AluniController {
      * @Security("has_role('ROLE_INSTITUCION')")
      * @Route("/descargar-checkeados", name="descargarCheckeados")
      */
-    public function descargarCheckeadosAction() {
-        $em = $this->doctrine->getManager();
+    #[NoReturn] public function descargarCheckeadosAction(): void {
+        
         $checkeos = $this->getUser()->getCheckeos();
         $participantes = [];
         $csvstring = ('"Nº entrada";"Nombre completo";"Email";"Nacionalidad";"Sexo";"Universidad";"¿Cómo ha conocido el evento?"' . "\n");
@@ -152,7 +153,7 @@ class InstitucionesController extends AluniController {
      * @param integer $status_code
      * @return Response
      */
-    public function respuestaJSON($data, $status_code) {
+    public function respuestaJSON(mixed $data, int $status_code): Response {
         if (is_object($data) || is_array($data)) {
             $encoders = [new JsonEncoder()];
             $normalizers = [new GetSetMethodNormalizer()];
@@ -169,20 +170,19 @@ class InstitucionesController extends AluniController {
     }
 
     public function encodeCSVField($string) {
-        if (strpos($string, ',') !== false || strpos($string, '"') !== false || strpos($string, "\n") !== false) {
+        if (str_contains($string, ',') || str_contains($string, '"') || str_contains($string, "\n")) {
             $string = '"' . str_replace('"', '""', $string) . '"';
         }
         return $string;
     }
 
-    private function normalizar($str) {
+    private function normalizar($str): array|string|null {
         // Normalize line endings
         // Convert all line-endings to UNIX format
         $s = str_replace("\r\n", "\n", $str);
         $s = str_replace("\r", "\n", $s);
         // Don't allow out-of-control blank lines
-        $s = preg_replace("/\n{2,}/", "\n", $s);
-        return $s;
+        return preg_replace("/\n{2,}/", "\n", $s);
     }
 
 }

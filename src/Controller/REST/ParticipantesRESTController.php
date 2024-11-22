@@ -2,10 +2,8 @@
 
 namespace App\Controller\REST;
 
-use Doctrine\Common\Collections\Collection;
-use FOS\RestBundle\Controller\Annotations\Route;
-use FOS\RestBundle\Controller\Annotations\View;
-
+use App\Entity\Participante;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,25 +15,25 @@ use Symfony\Component\HttpFoundation\Request;
  * 
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
- * @Route("/participantes")
  */
 class ParticipantesRESTController extends AluniRESTController {
 
     /**
-     * @View(serializerGroups={"lista-participantes"})
+     * @Rest\View(serializerGroups={"lista-participantes"})
+     * @Rest\Get("/participantes", name="get_participantes")
      * @Security("has_role('ROLE_INSTITUCION') || has_role('ROLE_EMPLEADO')")
      * @param Request $request
-     * @return Collection
+     * @return array|object[]|Participante[]
      */
-    public function getParticipantesAction(Request $request) {
-        if ($this->get('seg_service')->esInstitucion()) {
+    public function getParticipantesAction(Request $request): array {
+        if ($this->seguridad->esInstitucion()) {
             $checkeos = $this->getUser()->getCheckeos();
             $participantes = [];
             foreach ($checkeos as $checkeo) {
                 $participantes[] = $checkeo->getParticipante();
             }
         } else {
-            $participantes = $this->doctrine->getRepository('SWDMadridBundle:Participante')->findAll();
+            $participantes = $this->doctrine->getRepository(Participante::class)->findAll();
         }
         return $participantes;
     }
@@ -43,27 +41,30 @@ class ParticipantesRESTController extends AluniRESTController {
     /**
      * Devuelve una participante determinada en formato json.
      *
-     * @View(serializerGroups={"lista-participantes"})
+     * @Rest\View(serializerGroups={"lista-participantes"})
+     * @Rest\Get("/participantes/{id}")
      * @param integer $id
      * @return Participante
      */
-    public function getParticipanteAction($id) {
-        return $this->doctrine->getRepository('SWDMadridBundle:Participante')->find($id);
+    public function getParticipanteAction(int $id): Participante {
+        return $this->doctrine->getRepository(Participante::class)->find($id);
     }
 
     /**
      * Actualiza un recibo con sus desgloses a partir de la información que llega por la Request en formato json.
-     * 
+     *
+     *
+     * @Rest\Put("/participantes/{id}")
      * @param Request $request
      * @param integer $id
-     * @return Response
+     * @return JsonResponse
      */
-    public function putParticipanteAction(Request $request, $id) {
-        $participante = $this->get('jms_serializer')->deserialize(
+    public function putParticipanteAction(Request $request, int $id): JsonResponse {
+        $participante = $this->serializer->deserialize(
                 $request->getContent(), 
                 'App\Entity\Participante', 
                 'json');
-        $em = $this->doctrine->getManager();
+        
         $this->em->persist($participante);
         $this->em->flush();
         return new JsonResponse(['mensaje' => "Participante $id actualizado correctamente"]);

@@ -2,10 +2,8 @@
 
 namespace App\Controller\REST;
 
-use Doctrine\Common\Collections\Collection;
-use FOS\RestBundle\Controller\Annotations\Route;
-use FOS\RestBundle\Controller\Annotations\View;
-
+use App\Entity\Sorteo;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,50 +15,38 @@ use Symfony\Component\HttpFoundation\Request;
  * 
  * @author Álvaro Peláez Santana
  * @copyright ALUNI MADRID S.L.
- * @Route("/sorteos")
  */
 class SorteosRESTController extends AluniRESTController {
 
     /**
-     * @View(serializerGroups={"lista-sorteos"})
+     * @Rest\View(serializerGroups={"lista-sorteos"})
+     * @Rest\Get("/sorteos", name="get_sorteos")
      * @Security("has_role('ROLE_INSTITUCION') || has_role('ROLE_EMPLEADO')")
-     * @param Request $request
-     * @return Collection
+     * @return array|object[]|Sorteo[]
      */
-    public function getSorteosAction(Request $request) {
-        if ($this->get('seg_service')->esInstitucion()) {
+    public function getSorteosAction(): array {
+        if ($this->seguridad->esInstitucion()) {
             $checkeos = $this->getUser()->getCheckeos();
             $sorteos = [];
             foreach ($checkeos as $checkeo) {
                 $sorteos[] = $checkeo->getSorteo();
             }
         } else {
-            $sorteos = $this->doctrine->getRepository('SWDMadridBundle:Sorteo')->findAll();
+            $sorteos = $this->doctrine->getRepository(Sorteo::class)->findAll();
         }
         return $sorteos;
     }
 
     /**
-     * Devuelve una sorteo determinada en formato json.
-     *
-     * @View()
-     * @param integer $id
-     * @return Sorteo
-     */
-    public function getSorteoAction($id) {
-        return $this->doctrine->getRepository('SWDMadridBundle:Sorteo')->find($id);
-    }
-
-    /**
      * Actualiza un recibo con sus desgloses a partir de la información que llega por la Request en formato json.
-     * 
+     *
+     *
+     * @Rest\Post("/sorteos")
      * @param Request $request
-     * @param integer $id
-     * @return Response
+     * @return JsonResponse
      */
-    public function postSorteoAction(Request $request) {
-        $sorteo = $this->get('jms_serializer')->deserialize($request->getContent(), 'App\Entity\Sorteo', 'json');
-        $em = $this->doctrine->getManager();
+    public function postSorteoAction(Request $request): JsonResponse {
+        $sorteo = $this->serializer->deserialize($request->getContent(), 'App\Entity\Sorteo', 'json');
         $this->em->persist($sorteo);
         foreach ($sorteo->getParticipantes() as $participante) {
             $participante->addSorteo($sorteo);
@@ -72,15 +58,16 @@ class SorteosRESTController extends AluniRESTController {
 
     /**
      * Actualiza un recibo con sus desgloses a partir de la información que llega por la Request en formato json.
-     * 
+     *
+     * @Rest\Put("/sorteos/{id}")
      * @param Request $request
      * @param integer $id
-     * @return Response
+     * @return JsonResponse
      */
-    public function putSorteoAction(Request $request, $id) {
-        $sorteo = $this->get('jms_serializer')->deserialize(
+    public function putSorteoAction(Request $request, int $id): JsonResponse {
+        $sorteo = $this->serializer->deserialize(
                 $request->getContent(), 'App\Entity\Sorteo', 'json');
-        $em = $this->doctrine->getManager();
+        
         $this->em->persist($sorteo);
         $this->em->flush();
         return new JsonResponse(['mensaje' => "Sorteo $id actualizado correctamente"]);

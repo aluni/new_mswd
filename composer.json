@@ -6,6 +6,7 @@
     "require": {
         "php": ">=8.3",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "*",
         "doctrine/dbal": "^3",
@@ -14,7 +15,9 @@
         "doctrine/orm": "^2.6",
         "friendsofsymfony/rest-bundle": "^3.7",
         "friendsofsymfony/user-bundle": "*",
+        "google/apiclient": "*",
         "jms/serializer-bundle": "*",
+        "knplabs/knp-snappy-bundle": "*",
         "phpdocumentor/reflection-docblock": "^5.5",
         "phpstan/phpdoc-parser": "^1.33",
         "sensio/framework-extra-bundle": "*",
@@ -48,8 +51,7 @@
         "symfony/web-link": "6.4.*",
         "symfony/yaml": "6.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0",
-        "ext-curl": "*"
+        "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {

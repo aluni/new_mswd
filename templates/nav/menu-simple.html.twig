@@ -1,4 +1,4 @@
-{% extends "SWDMadridBundle:Nav:navegacion.html.twig" %}
+{% extends "Nav:navegacion.html.twig" %}
 
 {% block menu %}
     <li class="page-scroll home">
@@ -7,5 +7,5 @@
     <li class="page-scroll">
         <a href="{{ url('home') }}/#inscripcion">Sign Up</a>
     </li>
-    {% include 'SWDMadridBundle:Nav:menu-comun.html.twig' %}
+    {% include Nav:menu-comun.html.twig::class %}
 {% endblock %}

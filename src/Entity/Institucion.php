@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use AllowDynamicProperties;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Institucion extends Usuario {
+#[AllowDynamicProperties] class Institucion extends Usuario {
 
     /**
      * @var string
@@ -310,11 +311,11 @@ class Institucion extends Usuario {
     /**
      * Add checkeo
      *
-     * @param \App\Entity\Checkeo $checkeo
+     * @param Checkeo $checkeo
      *
      * @return Institucion
      */
-    public function addCheckeo(\App\Entity\Checkeo $checkeo) {
+    public function addCheckeo(Checkeo $checkeo) {
         $this->checkeos[] = $checkeo;
 
         return $this;
@@ -323,9 +324,9 @@ class Institucion extends Usuario {
     /**
      * Remove checkeo
      *
-     * @param \App\Entity\Checkeo $checkeo
+     * @param Checkeo $checkeo
      */
-    public function removeCheckeo(\App\Entity\Checkeo $checkeo) {
+    public function removeCheckeo(Checkeo $checkeo) {
         $this->checkeos->removeElement($checkeo);
     }
 
@@ -341,11 +342,11 @@ class Institucion extends Usuario {
     /**
      * Add sorteo
      *
-     * @param \App\Entity\Sorteo $sorteo
+     * @param Sorteo $sorteo
      *
      * @return Institucion
      */
-    public function addSorteo(\App\Entity\Sorteo $sorteo) {
+    public function addSorteo(Sorteo $sorteo) {
         $this->sorteos[] = $sorteo;
 
         return $this;
@@ -354,9 +355,9 @@ class Institucion extends Usuario {
     /**
      * Remove sorteo
      *
-     * @param \App\Entity\Sorteo $sorteo
+     * @param Sorteo $sorteo
      */
-    public function removeSorteo(\App\Entity\Sorteo $sorteo) {
+    public function removeSorteo(Sorteo $sorteo) {
         $this->sorteos->removeElement($sorteo);
     }
 

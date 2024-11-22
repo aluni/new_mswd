@@ -3,16 +3,17 @@
 namespace App\Controller;
 
 
+use App\Entity\ComoConoce;
+use App\Entity\Pais;
+use App\Entity\Participante;
+use App\Form\SorteoType;
+use Doctrine\DBAL\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Form\ParticipanteFiltrosType;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * @author Álvaro Peláez Santana
@@ -21,21 +22,22 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class AdminController extends AluniController {
 
     /**
-     * @return Response
+     * @return array
      * @Route("/lista-participantes", name="lista-participantes")
      * @Security("has_role('ROLE_INSTITUCION') || has_role('ROLE_EMPLEADO')")
      * @Template
+     * @throws Exception
      */
-    public function listaParticipantesAction() {
-        $paises = $this->conn->executeQuery('SELECT es FROM Pais')->fetchAll(\PDO::FETCH_COLUMN);
+    public function listaParticipantesAction(): array {
+        $paises = $this->conn->executeQuery('SELECT es FROM Pais')->fetchFirstColumn();
         foreach ($paises as $i => $pais) {
             $paises[$pais] = $pais;
             unset($paises[$i]);
         }
-        $formFiltrosParticipante = $this->createForm(new ParticipanteFiltrosType($paises));
-        $paises = $this->doctrine->getRepository('SWDMadridBundle:Pais')->findAll();
-        $formSorteo = $this->createForm(new SorteoType());
-        $comoConoce = $this->doctrine->getRepository('SWDMadridBundle:ComoConoce')->findBy([], ['comoConoce' => 'ASC']);
+        $formFiltrosParticipante = $this->createForm(ParticipanteFiltrosType::class, null, ['paises' => $paises]);
+        $paises = $this->doctrine->getRepository(Pais::class)->findAll();
+        $formSorteo = $this->createForm(SorteoType::class);
+        $comoConoce = $this->doctrine->getRepository(ComoConoce::class)->findBy([], ['comoConoce' => 'ASC']);
         return ['paises' => $paises,
             'comoConoce' => $comoConoce,
             'formFiltrosParticipante' => $formFiltrosParticipante->createView(),
@@ -44,20 +46,21 @@ class AdminController extends AluniController {
     }
 
     /**
-     * @return Response
+     * @return array
      * @Route("/sorteos", name="sorteos")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      * @Template
+     * @throws Exception
      */
-    public function sorteosAction() {
-        $paises = $this->conn->executeQuery('SELECT es FROM Pais')->fetchAll(\PDO::FETCH_COLUMN);
+    public function sorteosAction(): array {
+        $paises = $this->conn->executeQuery('SELECT es FROM Pais')->fetchFirstColumn();
         foreach ($paises as $i => $pais) {
             $paises[$pais] = $pais;
             unset($paises[$i]);
         }
         $participantesREST = $this->generateUrl('participantesREST');
-        $formFiltrosParticipante = $this->createForm(new ParticipanteFiltrosType($paises));
-        $formSorteo = $this->createForm(new SorteoType());
+        $formFiltrosParticipante = $this->createForm(ParticipanteFiltrosType::class, null, ['paises' => $paises]);
+        $formSorteo = $this->createForm(SorteoType::class);
         return ['participantesREST' => $participantesREST,
             'formFiltrosParticipante' => $formFiltrosParticipante->createView(),
             'formSorteo' => $formSorteo->createView(),
@@ -66,42 +69,16 @@ class AdminController extends AluniController {
     }
 
     /**
-     * @Route("/participantes/{id}", requirements={"_format"="json"})
-     * @Method({"PUT"})
+     * @Route("/participantes/{id}", requirements={"_format"="json"}, methods={"PUT"})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function updateParticipanteAction(Request $request, $id) {
-        $participante = $this->doctrine->getRepository('SWDMadridBundle:Participante')->find($id);
+    public function updateParticipanteAction(Request $request, $id): JsonResponse {
+        $participante = $this->doctrine->getRepository(Participante::class)->find($id);
         $datosParticipante = json_decode($request->getContent(), true);
         $participante->setAsistido($datosParticipante['asistido']);
         $participante->setSorteo($datosParticipante['sorteo']);
         $this->doctrine->getManager()->flush();
-        return $this->respuestaJSON(['mensaje' => 'Guardado correctamente'], 200);
-    }
-
-    /**
-     * @param mixed $data
-     * @param integer $status_code
-     * @return Response
-     */
-    public function respuestaJSON($data, $status_code = 200, $ignoredAttr = []) {
-        if (is_object($data) || is_array($data)) {
-            $encoder = new JsonEncoder();
-            $normalizer = new ObjectNormalizer();
-            $normalizer->setCircularReferenceHandler(function ($object) {
-                return strval($object);
-            });
-            $normalizer->setIgnoredAttributes($ignoredAttr);
-            $serializer = new Serializer(array($normalizer), array($encoder));
-            $json = $serializer->serialize($data, 'json', ['groups' => ['listado']]);
-        } else {
-            $json = $data;
-        }
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json;charset=UTF-8');
-        $response->setContent($json);
-        $response->setStatusCode($status_code);
-        return $response;
+        return new JsonResponse(['mensaje' => 'Guardado correctamente']);
     }
 
 }

@@ -51,10 +51,9 @@ class ComoConoce
      *
      * @param string $comoConoce
      *
-     * @return Participante
+     * @return ComoConoce
      */
-    public function setComoConoce($comoConoce)
-    {
+    public function setComoConoce($comoConoce): static {
         $this->comoConoce = $comoConoce;
 
         return $this;
@@ -87,9 +86,9 @@ class ComoConoce
     /**
      * Set etiqueta 
      *
-     * @param string etiqueta
+     * @param string $etiqueta
      *
-     * @return Participante
+     * @return ComoConoce
      */
     function setEtiqueta($etiqueta) {
         $this->etiqueta = $etiqueta;

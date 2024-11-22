@@ -1,12 +1,12 @@
-{% extends "SWDMadridBundle::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include 'SWDMadridBundle:Nav:menu-instituciones.html.twig' %}
+    {% include Nav:menu-instituciones.html.twig::class %}
 {% endblock %}
 
 {% block content %}
     <div id="intro">
-        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/encabezado-instituciones.jpg') }}">
+        <img class="img-responsive" src="{{ asset('img/encabezado-instituciones.jpg') }}">
         {#        <a href="https://issuu.com/aluni.net/docs/revista_b_2017?ff=true" target="_blank" class="btn btn-lg btn-transp btn-carrusel">¡Descarga la revista oficial!</a>#}
     </div>
     <div class="bg-grey">
@@ -25,7 +25,7 @@
                         <iframe class="marco-video img-responsive" width="800" height="600" src="https://www.youtube.com/embed/3fvxWasz-qE" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
-                {% include 'SWDMadridBundle:Default:albumes.html.twig' %}
+                {% include Default:albumes.html.twig::class %}
             </div>
         </div>
         <div id="datos" class="parallax-counter parallaxBg">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-xs-8 col-sm-offset-0 col-xs-offset-2" >
-                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/panel5.png') }}" alt="">
+                        <img class="img-responsive" src="{{ asset('img/panel5.png') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
             </div>
         </div>
         <div>
-            <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/header7.jpg') }}" alt="">
+            <img class="img-responsive" src="{{ asset('img/header7.jpg') }}" alt="">
         </div>
         {#
         <div id="patrocinadores" class="container content-sm">
@@ -152,7 +152,7 @@
             <div class="row margin-bottom-20">
                 <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.014media.com/sociedades/unicampus/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-unicampus.png') }}" alt=""></a>
+                        <a href="http://www.014media.com/sociedades/unicampus/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-unicampus.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-sm-7 col-xs-12">
@@ -162,7 +162,7 @@
             <div class="row margin-bottom-20">
                 <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.universia.es/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-universia.jpg') }}" alt=""></a>
+                        <a href="http://www.universia.es/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-universia.jpg') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-sm-7 col-xs-12">
@@ -172,7 +172,7 @@
             <div class="row margin-bottom-20">
                 <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.aluni.net" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-aluni.png') }}" alt=""></a>
+                        <a href="http://www.aluni.net" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-aluni.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-sm-7 col-xs-12">
@@ -182,7 +182,7 @@
             <div class="row margin-bottom-20">
                 <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.madrid.es/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-aytoMadrid.png') }}" alt=""></a>
+                        <a href="http://www.madrid.es/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-aytoMadrid.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-sm-7 col-xs-12">
@@ -192,7 +192,7 @@
             {#<div class="row margin-bottom-20">
                 <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.madrid.org/" target="_blank"><img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/logo-comMadrid.jpg') }}" alt=""></a>
+                        <a href="http://www.madrid.org/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-comMadrid.jpg') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-sm-7 col-xs-12">
@@ -240,7 +240,7 @@
                         </div>
                     </div>
                     <div class="col-sm-5 col-sm-offset-0 col-xs-6 col-xs-offset-3">
-                        <img class="img-responsive" src="{{ asset('bundles/swdmadrid/src/img/panel8.png') }}" alt="">
+                        <img class="img-responsive" src="{{ asset('img/panel8.png') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -277,7 +277,7 @@
             </div>
         </div>
         <section class="container">
-            {% include 'SWDMadridBundle:Default:organizadores.html.twig' %}
+            {% include Default:organizadores.html.twig::class %}
         </section>
         <div class="contacts-section margin-top-20 last">
             <div id="contacta" class="container content-sm">

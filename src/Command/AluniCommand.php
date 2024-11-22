@@ -5,9 +5,11 @@ namespace App\Command;
 use AllowDynamicProperties;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\UserBundle\Util\UserManipulator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Comando base
@@ -15,16 +17,16 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  * @author Álvaro Peláez Santana
  * @copyright ALUNI ALOJAMIENTOS S.L.
  */
-#[AllowDynamicProperties] class AluniCommand extends Command {
-    protected Connection $conn;
-    protected static $defaultName = 'aluni:comando-base';
+#[AllowDynamicProperties]
+#[AsCommand(name: 'aluni:comando-base')]
+class AluniCommand extends Command {
 
-
-    public function __construct(EntityManagerInterface $em, ParameterBagInterface $params, UserManipulator $userManipulator) {
-        $this->conn = $em->getConnection();
-        $this->em = $em;
-        $this->userManipulator = $userManipulator;
-        $this->params = $params;
+    public function __construct(protected EntityManagerInterface $em,
+                                protected Connection $conn,
+                                protected ParameterBagInterface $params,
+                                #[Autowire(service: 'fos_user.util.user_manipulator')]
+                                protected $userManipulator,
+                                protected RouterInterface $router) {
         parent::__construct();
     }
 }

@@ -14,12 +14,12 @@
 
         {% block stylesheets %}
             {# CSS Global Compulsory #}
-            <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/ticket.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/ticket.css') }}">
         {% endblock %}
     </head>
 
     <body>
-        <div id="ticket" style="background-image: url('{{ asset('bundles/swdmadrid/src/img/ticket_mswd_min.png') }}')">
+        <div id="ticket" style="background-image: url('{{ asset('img/ticket_mswd_min.png') }}')">
             <div class="lateral">
                 <div class="textoLateralIzq">
                     nº {{ numeroEntrada }}

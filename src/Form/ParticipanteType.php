@@ -4,7 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ParticipanteType extends AbstractType
 {
@@ -12,8 +12,7 @@ class ParticipanteType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
             ->add('nombre')
             ->add('apellidos')
@@ -29,20 +28,18 @@ class ParticipanteType extends AbstractType
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
+    public function configureOptions(OptionsResolver $resolver): void {
+        $resolver->setDefaults([
             'data_class' => 'App\Entity\Participante'
-        ));
+        ]);
     }
 
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName(): string {
         return 'swd_madridbundle_participante';
     }
 }

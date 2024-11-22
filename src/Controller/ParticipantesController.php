@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 
+use Knp\Snappy\Pdf;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -10,17 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Participante;
-use Google_Service_Gmail;
-use Google_Service_Gmail_Message;
-use Swift_Message;
-use Swift_Attachment;
 
 class ParticipantesController extends AluniController {
 
     /**
      * @Route("/guardarInscripcion", name="guardarInscripcion")
      */
-    public function guardarInscripcionAction(Request $request) {
+    public function guardarInscripcionAction(Request $request): Response {
         $datos = $request->request->all();
         $participante = new Participante();
         foreach ($datos as $clave => $valor) {
@@ -33,7 +31,7 @@ class ParticipantesController extends AluniController {
         $participante->setUsername($participante->getEmail());
         $participante->setPassword('1q2w3e');
         $participante->setHoraEntrada(date_create());
-        $em = $this->doctrine->getManager();
+        
         $this->em->persist($participante);
         $this->em->flush();
         $numeroEntrada = $this->generarNumeroEntrada($participante);
@@ -42,7 +40,7 @@ class ParticipantesController extends AluniController {
         $nombreCompleto = $participante->getNombre() . ' ' . $participante->getApellidos();
         $titulo = "$nombreCompleto we welcome you to the MSWD!";
         $email = $participante->getEmail();
-        $plantilla = $this->renderView('SWDMadridBundle:Mails:validacion.html.twig', [
+        $plantilla = $this->renderView('mails/validacion.html.twig', [
             'titulo' => $titulo,
             'nombre' => $nombreCompleto,
             'numeroEntrada' => $numeroEntrada]);
@@ -58,25 +56,26 @@ class ParticipantesController extends AluniController {
     /**
      * @Route("/validarParticipante/{numeroEntrada}", name="validarParticipante")
      */
-    public function validarParticipanteAction($numeroEntrada) {
-        $em = $this->doctrine->getManager();
-        $participante = $this->em->getRepository('SWDMadridBundle:Participante')->findOneByNumeroEntrada($numeroEntrada);
+    public function validarParticipanteAction(Pdf $pdf, $numeroEntrada): RedirectResponse {
+        
+        $participante = $this->em->getRepository(Participante::class)->findOneBy(['numeroEntrada' => $numeroEntrada]);
         if (empty($participante)) {
             throw new AccessDeniedHttpException('Acceso no permitido');
         }
-        $this->get('fos_user.util.user_manipulator')->activate($participante->getUsername());
-        $this->get('fos_user.util.user_manipulator')->changePassword($participante->getUsername(), $participante->getNumeroEntrada());
+        $this->userManipulator->activate($participante->getUsername());
+        $this->userManipulator->changePassword($participante->getUsername(), $participante->getNumeroEntrada());
         $random = substr($participante->getEmail(), 1, 2);
-        $ficheroTicket = $this->get('kernel')->getRootDir() . '/../web/tickets/' . $random . $numeroEntrada . '.pdf';
+
+        $ficheroTicket = $this->getParameter('kernel.project_dir') . '/public/tickets/' . $random . $numeroEntrada . '.pdf';
         $urlFichero = $this->generateUrl('home', [], true) . 'tickets/' . $random . $numeroEntrada . '.pdf';
         if (file_exists($ficheroTicket)) {
             unlink($ficheroTicket);
         }
-        $this->get('knp_snappy.pdf')->generate($this->generateUrl('verTicket', ['numeroEntrada' => $numeroEntrada], true), $ficheroTicket);
+        $pdf->generate($this->generateUrl('verTicket', ['numeroEntrada' => $numeroEntrada], true), $ficheroTicket);
         $nombreCompleto = $participante->getNombre() . ' ' . $participante->getApellidos();
         $titulo = "$nombreCompleto here you have your ticket!";
         $email = $participante->getEmail();
-        $plantilla = $this->renderView('SWDMadridBundle:Mails:ticket.html.twig', [
+        $plantilla = $this->renderView('mails/ticket.html.twig', [
             'titulo' => $titulo,
             'nombre' => $nombreCompleto,
             'numeroEntrada' => $numeroEntrada,
@@ -94,9 +93,9 @@ class ParticipantesController extends AluniController {
      * @Route("/imdabestever/verTicket/{numeroEntrada}", name="verTicket")
      * @Template()
      */
-    public function verTicketAction($numeroEntrada) {
-        $em = $this->doctrine->getManager();
-        $participante = $this->em->getRepository('SWDMadridBundle:Participante')->findOneByNumeroEntrada($numeroEntrada);
+    public function verTicketAction($numeroEntrada): array {
+        
+        $participante = $this->em->getRepository(Participante::class)->findOneByNumeroEntrada($numeroEntrada);
         if (empty($participante)) {
             throw new AccessDeniedHttpException('Acceso no permitido');
         }
@@ -108,8 +107,8 @@ class ParticipantesController extends AluniController {
      * @Security("has_role('ROLE_USER')")
      * @Template
      */
-    public function infoParticipanteAction() {
-        if ($this->get('seg_service')->esInstitucion() || $this->get('seg_service')->esEmpleado()) {
+    public function infoParticipanteAction(): RedirectResponse|array {
+        if ($this->seguridad->esInstitucion() || $this->seguridad->esEmpleado()) {
             return $this->redirect($this->generateUrl('lista-participantes'));
         }
         $participante = $this->getUser();
@@ -119,44 +118,8 @@ class ParticipantesController extends AluniController {
     }
 
     //========================================FUNCIONES AUXILIARES====================================================//
-    private function enviarEmail($plantilla, $asunto, $from, $to, $adjuntos = []) {
-        $replyTo = $from;
-        $mensaje = Swift_Message::newInstance()
-                ->setSubject($asunto)
-                ->setFrom($from)
-                ->setReplyTo($replyTo)
-                ->setTo($to)
-                ->setBody($plantilla, 'text/html');
-        foreach ($adjuntos as $adjunto) {
-            $mensaje->attach(Swift_Attachment::fromPath($adjunto));
-        }
-        try {
-            // The message needs to be encoded in Base64URL
-            $mime = rtrim(strtr(base64_encode($mensaje), '+/', '-_'), '=');
-            $msg = new Google_Service_Gmail_Message();
-            $msg->setRaw($mime);
-            // Get the API client and construct the service object.
-            $datosCliente = ['nombreApp' => "MSWD",
-                'alias' => 'gmail',
-                'scopes' => implode(' ', [
-                    Google_Service_Gmail::GMAIL_READONLY,
-                    Google_Service_Gmail::GMAIL_COMPOSE,
-                    Google_Service_Gmail::GMAIL_MODIFY]
-                ),
-                'usuario' => $from];
-            $client = $this->get('google_manager')->getClient($datosCliente);
-            $gmailService = new Google_Service_Gmail($client);
-            //The special value **me** can be used to indicate the authenticated user.
-            $gmailService->users_messages->send("me", $msg);
-            return true;
-        } catch (Exception $e) {
-            print_r($e->getMessage());
-            return -1;
-        }
-        //$this->get('mailer')->send($mensaje);
-    }
 
-    private function generarNumeroEntrada($participante) {
+    private function generarNumeroEntrada($participante): string {
         $numeroReal = substr('0000' . $participante->getId(), -4);
         return substr(time() . $numeroReal, -5);
     }

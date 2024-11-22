@@ -177,11 +177,11 @@ class Sorteo {
     /**
      * Add participante
      *
-     * @param \App\Entity\Participante $participante
+     * @param Participante $participante
      *
      * @return Sorteo
      */
-    public function addParticipante(\App\Entity\Participante $participante) {
+    public function addParticipante(Participante $participante) {
         $this->participantes[] = $participante;
 
         return $this;
@@ -190,9 +190,9 @@ class Sorteo {
     /**
      * Remove participante
      *
-     * @param \App\Entity\Participante $participante
+     * @param Participante $participante
      */
-    public function removeParticipante(\App\Entity\Participante $participante) {
+    public function removeParticipante(Participante $participante) {
         $this->participantes->removeElement($participante);
     }
 
@@ -208,11 +208,11 @@ class Sorteo {
     /**
      * Set institucion
      *
-     * @param \App\Entity\Institucion $institucion
+     * @param Institucion $institucion
      *
      * @return Sorteo
      */
-    public function setInstitucion(\App\Entity\Institucion $institucion = null) {
+    public function setInstitucion(Institucion $institucion = null) {
         $this->institucion = $institucion;
 
         return $this;
@@ -221,7 +221,7 @@ class Sorteo {
     /**
      * Get institucion
      *
-     * @return \App\Entity\Institucion
+     * @return Institucion
      */
     public function getInstitucion() {
         return $this->institucion;

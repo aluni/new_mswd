@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+
 /**
  * Servicio que se encarga de comprobaciones de seguridad. Es usado en distintas partes del proyecto
  * 
@@ -10,21 +12,15 @@ namespace App\Services;
  */
 class SeguridadService {
 
-    protected $session, $authChecker, $tokenStorage, $em, $conn;
 
-    public function __construct($session, $authChecker, $tokenStorage, $em, $conn) {
-        $this->tokenStorage = $tokenStorage;
-        $this->session = $session;
-        $this->em = $em;
-        $this->conn = $conn;
-        $this->authChecker = $authChecker;
-    }
+    public function __construct(protected AuthorizationCheckerInterface $authChecker) {}
+
     /**
      * Devuelve si el usuario actual es o no empleado.
      * 
      * @return boolean
      */
-    public function esEmpleado() {
+    public function esEmpleado(): bool {
         return $this->authChecker->isGranted('ROLE_EMPLEADO');
     }
 
@@ -33,7 +29,7 @@ class SeguridadService {
      * 
      * @return boolean
      */
-    public function esUsuario() {
+    public function esUsuario(): bool {
         return $this->authChecker->isGranted('ROLE_USER');
     }
 
@@ -42,7 +38,7 @@ class SeguridadService {
      * 
      * @return boolean
      */
-    public function esParticipante() {
+    public function esParticipante(): bool {
         return $this->authChecker->isGranted('ROLE_PARTICIPANTE');
     }
 
@@ -51,7 +47,7 @@ class SeguridadService {
      * 
      * @return boolean
      */
-    public function esInstitucion() {
+    public function esInstitucion(): bool {
         return $this->authChecker->isGranted('ROLE_INSTITUCION');
     }
 
@@ -60,7 +56,7 @@ class SeguridadService {
      * 
      * @return boolean
      */
-    public function esAdmin() {
+    public function esAdmin(): bool {
         return $this->authChecker->isGranted('ROLE_ADMIN');
     }
 

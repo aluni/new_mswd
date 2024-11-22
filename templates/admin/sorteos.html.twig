@@ -1,11 +1,11 @@
-{% extends "SWDMadridBundle::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+    {% include Nav:menu-simple.html.twig::class %}
 {% endblock %}
 
-{% form_theme formFiltrosParticipante 'SWDMadridBundle:Form:fields.html.twig' %}
-{% form_theme formSorteo 'SWDMadridBundle:Form:fields.html.twig' %}
+{% form_theme formFiltrosParticipante Form:fields.html.twig::class %}
+{% form_theme formSorteo Form:fields.html.twig::class %}
 
 {% block content %}
     <div ng-app="participantesApp" class="container-fluid last">
@@ -16,17 +16,17 @@
             </center>
         </div>
         <div class="seccionAngular" ng-controller="Participantes" style="display: none">
-            {% include 'SWDMadridBundle:Admin:Sorteos/formularioSorteo.html.twig' %}
+            {% include Admin:Sorteos/formularioSorteo.html.twig::class %}
             <h2>Lista de participantes</h2>
-            {% include 'SWDMadridBundle:Admin:ListaParticipantes/filtro.html.twig' %}
-            {% include 'SWDMadridBundle:Admin:ListaParticipantes/lista.html.twig' %}
-            {% include 'SWDMadridBundle:Admin:Sorteos/ganadores.html.twig' %}
+            {% include Admin:ListaParticipantes/filtro.html.twig::class %}
+            {% include Admin:ListaParticipantes/lista.html.twig::class %}
+            {% include Admin:Sorteos/ganadores.html.twig::class %}
         </div>
     </div>
 {% endblock content %}
 
 {% block custom_stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mswd-estud.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -41,8 +41,8 @@
     <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
     <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
     {# Aplicación del Blog #} 
-    <script src="{{ asset('bundles/swdmadrid/src/js/funciones_aux.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/src/js/participantesApp/participantesControllers.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/src/js/participantesApp/participantesFilters.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/src/js/participantesApp/participantesApp.js') }}"></script>
+    <script src="{{ asset('js/funciones_aux.js') }}"></script>
+    <script src="{{ asset('js/participantesApp/participantesControllers.js') }}"></script>
+    <script src="{{ asset('js/participantesApp/participantesFilters.js') }}"></script>
+    <script src="{{ asset('js/participantesApp/participantesApp.js') }}"></script>
 {% endblock %}

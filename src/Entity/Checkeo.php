@@ -82,11 +82,11 @@ class Checkeo {
     /**
      * Set participante
      *
-     * @param \App\Entity\Participante $participante
+     * @param Participante $participante
      *
      * @return Checkeo
      */
-    public function setParticipante(\App\Entity\Participante $participante = null) {
+    public function setParticipante(Participante $participante = null) {
         $this->participante = $participante;
 
         return $this;
@@ -95,7 +95,7 @@ class Checkeo {
     /**
      * Get participante
      *
-     * @return \App\Entity\Participante
+     * @return Participante
      */
     public function getParticipante() {
         return $this->participante;
@@ -104,11 +104,11 @@ class Checkeo {
     /**
      * Set institucion
      *
-     * @param \App\Entity\Institucion $institucion
+     * @param Institucion $institucion
      *
      * @return Checkeo
      */
-    public function setInstitucion(\App\Entity\Institucion $institucion = null) {
+    public function setInstitucion(Institucion $institucion = null) {
         $this->institucion = $institucion;
 
         return $this;
@@ -117,7 +117,7 @@ class Checkeo {
     /**
      * Get institucion
      *
-     * @return \App\Entity\Institucion
+     * @return Institucion
      */
     public function getInstitucion() {
         return $this->institucion;

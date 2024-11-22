@@ -3,15 +3,13 @@
 namespace App\Controller;
 
 
+use App\Entity\ComoConoce;
+use App\Entity\Pais;
+use App\Entity\Sorteo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Google_Service_Gmail;
-use Google_Service_Gmail_Message;
-use Swift_Message;
-use Swift_Attachment;
 
 class DefaultController extends AluniController {
 
@@ -19,10 +17,10 @@ class DefaultController extends AluniController {
      * @Route("/students", name="home")
      * @Template
      */
-    public function indexAction(Request $request) {
+    public function indexAction(Request $request): array {
         $cc = $request->query->get('cc');
-        $paises = $this->doctrine->getRepository('SWDMadridBundle:Pais')->findAll();
-        $comoConoce = $this->doctrine->getRepository('SWDMadridBundle:ComoConoce')->findBy([], ['comoConoce' => 'ASC']);
+        $paises = $this->doctrine->getRepository(Pais::class)->findAll();
+        $comoConoce = $this->doctrine->getRepository(ComoConoce::class)->findBy([], ['comoConoce' => 'ASC']);
         return ['paises' => $paises, 'comoConoce' => $comoConoce, 'cc' => $cc];
     }
 
@@ -30,7 +28,7 @@ class DefaultController extends AluniController {
      * @Route("/clausula-privacidad", name="clausulaPrivacidad")
      * @Template
      */
-    public function clausulaPrivacidadAction() {
+    public function clausulaPrivacidadAction(): array {
         return [];
     }
 
@@ -38,7 +36,7 @@ class DefaultController extends AluniController {
      * @Route("/aviso-legal", name="avisoLegal")
      * @Template
      */
-    public function avisoLegalAction() {
+    public function avisoLegalAction(): array {
         return [];
     }
 
@@ -46,7 +44,7 @@ class DefaultController extends AluniController {
      * @Route("/politica-cookies", name="politicaCookies")
      * @Template
      */
-    public function politicaCookiesAction() {
+    public function politicaCookiesAction(): array {
         return [];
     }
 
@@ -54,21 +52,20 @@ class DefaultController extends AluniController {
      * @Route("/concurso", name="concurso")
      * @Template
      */
-    public function concursoAction() {
+    public function concursoAction(): array {
         return [];
     }
 
     /**
-     * @Route("/enviarEmailContactar", name="enviarEmailContactar")
-     * @Method({"POST"})
+     * @Route("/enviarEmailContactar", name="enviarEmailContactar", methods={"POST"})
      */
-    public function enviarEmailContactarAction(Request $request) {
+    public function enviarEmailContactarAction(Request $request): Response {
         $email = $request->request->get('email');
         $nombre = $request->request->get('nombre');
         $mensaje = "<p>Nombre: <b>$nombre</b></p>"
                 . "<p>Email: <b>$email</b></p>"
                 . "<p>Mensaje: <b>" . $request->request->get('mensaje') . "</b></p>";
-        $this->enviarEmail($mensaje, "Mensaje desde contactar MSWD - $nombre", 'info@studentwelcomeday.com', 'diego.poole@gmail.com', $email);
+        $this->enviarEmail($mensaje, "Mensaje desde contactar MSWD - $nombre", 'diego.poole@gmail.com');
         return new Response('Email enviado correctamente');
     }
 
@@ -76,54 +73,18 @@ class DefaultController extends AluniController {
      * @Route("/lista-ganadores", name="lista_ganadores")
      * @Template
      */
-    public function listaGanadoresAction() {
-        $sorteos = $this->doctrine->getRepository('SWDMadridBundle:Sorteo')->findAll();
+    public function listaGanadoresAction(): array {
+        $sorteos = $this->doctrine->getRepository(Sorteo::class)->findAll();
         return ['sorteos' => $sorteos];
     }
 
     /**
      * @Route("/boletin-universia", name="boletin_universia")
-     * @Template("SWDMadridBundle:Mails:boletinUniversia.html.twig")
+     * @Template("mails/boletinUniversia.html.twig")
      */
-    public function boletinUniversiaAction() {
+    public function boletinUniversiaAction(): array {
         return [];
     }
 
-    private function enviarEmail($cuerpo, $asunto, $from, $to, $replyTo, $adjuntos = []) {
-        $replyTo = $from;
-        $mensaje = Swift_Message::newInstance()
-                ->setSubject($asunto)
-                ->setFrom($from)
-                ->setReplyTo($replyTo)
-                ->setTo($to)
-                ->setBody($cuerpo, 'text/html');
-        foreach ($adjuntos as $adjunto) {
-            $mensaje->attach(Swift_Attachment::fromPath($adjunto));
-        }
-        try {
-            // The message needs to be encoded in Base64URL
-            $mime = rtrim(strtr(base64_encode($mensaje), '+/', '-_'), '=');
-            $msg = new Google_Service_Gmail_Message();
-            $msg->setRaw($mime);
-            // Get the API client and construct the service object.
-            $datosCliente = ['nombreApp' => "MSWD",
-                'alias' => 'gmail',
-                'scopes' => implode(' ', [
-                    Google_Service_Gmail::GMAIL_READONLY,
-                    Google_Service_Gmail::GMAIL_COMPOSE,
-                    Google_Service_Gmail::GMAIL_MODIFY]
-                ),
-                'usuario' => $from];
-            $client = $this->get('google_manager')->getClient($datosCliente);
-            $gmailService = new Google_Service_Gmail($client);
-            //The special value **me** can be used to indicate the authenticated user.
-            $gmailService->users_messages->send("me", $msg);
-            return true;
-        } catch (Exception $e) {
-            print_r($e->getMessage());
-            return -1;
-        }
-        //$this->get('mailer')->send($mensaje);
-    }
 
 }

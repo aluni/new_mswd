@@ -1,10 +1,10 @@
 {% block form_row %}
     {% if (block_prefixes[1] == 'checkbox') %}
         <!-- Checkboxes -->
-        {% include "SWDMadridBundle:Form:checkbox.html.twig" %}
+        {% include "Form:checkbox.html.twig" %}
     {% elseif ((block_prefixes[1] == 'choice') and expanded) %}
         <!-- Radiobuttons -->
-        {% include "SWDMadridBundle:Form:radiobutton.html.twig" %}
+        {% include "Form:radiobutton.html.twig" %}
     {% else %}
         <!--  Text, number, email y textareas  -->
         <div class="form-group text-center"
@@ -12,11 +12,11 @@
             {% if label_attr.descripcion is defined %} data-toggle="tooltip"  data-placement="top"  data-original-title="{{ label_attr.descripcion|trans }}"{% endif %}
             {% if label_attr.width is defined %} style="max-width: {{ label_attr.width }}" {% endif %}> 
             <label for="{{ full_name }}" class="sr-only">{{ label|trans }}</label>
-            {% include "SWDMadridBundle:Form:input.html.twig" %}
+            {% include "Form:input.html.twig" %}
         </div>
     {% endif %}
 {% endblock %}
 
 {%  block form_errors %}
-    {% include "SWDMadridBundle:Form:errors.html.twig" %}
+    {% include "Form:errors.html.twig" %}
 {% endblock form_errors %}

@@ -43,7 +43,7 @@ class ActualizarInstitucionesCommand extends AluniCommand {
      * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output): int {
-        $instituciones = $this->em->getRepository('SWDMadridBundle:Institucion')->findBy(['enabled' => 1]);
+        $instituciones = $this->em->getRepository(Institucion::class)->findBy(['enabled' => 1]);
         foreach ($instituciones as $institucion) {
             $alias = $institucion->getAlias();
             $pass = 'mswd' . substr($alias, -2) . substr($alias, 0, 2);

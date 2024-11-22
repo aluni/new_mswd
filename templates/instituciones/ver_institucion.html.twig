@@ -1,7 +1,7 @@
-{% extends "SWDMadridBundle::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include 'SWDMadridBundle:Nav:menu-simple.html.twig' %}
+    {% include Nav:menu-simple.html.twig::class %}
 {% endblock %}
 
 {% block content %}
@@ -33,6 +33,6 @@
 {% endblock content %}
 
 {% block custom_stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/mswd-estud.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/swdmadrid/src/css/instituciones.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mswd-estud.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/instituciones.css') }}">
 {% endblock %}

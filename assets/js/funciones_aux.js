@@ -21,13 +21,13 @@ function paginacion($scope, listado, tamanoPag, ordenar) {
 }
 
 function variableVacia(variable) {
-    return(typeof (variable) === 'undefined' || variable === null || variable === '' || variable.length === 0);
+    return (typeof (variable) === 'undefined' || variable === null || variable === '' || variable.length === 0);
 }
 
 angular.module('configuracion', ['ngRoute', 'ngSanitize', 'ngResource', 'ui.bootstrap'])
-        .config(function ($interpolateProvider) {
-            $interpolateProvider.startSymbol('[[').endSymbol(']]');
-        });
+    .config(function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('[[').endSymbol(']]');
+    });
 
 $('select').change(function () {
     if (variableVacia($(this).val())) {
@@ -72,3 +72,16 @@ function getRandomInt(min, max) {
 }
 
 actualizarSelects();
+jQuery(document).ready(function () {
+    App.init();
+    App.initCounter();
+    App.initParallaxBg();
+    OwlCarousel.initOwlCarousel();
+    RevolutionSlider.initRSfullScreen();
+});
+function scrollToTop() {
+    $('body,html').animate({
+        scrollTop: 0
+    }, 1000);
+    return false;
+}
