@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include Nav:menu-simple.html.twig::class %}
+    {% include 'nav/menu-simple.html.twig'%}
 {% endblock %}
 
 {% block content %}
@@ -13,12 +13,12 @@
             </a>
         {% endif %}
         <div id="mensajeEspera" class="row">
-            <center>
+            <div style="text-align: center;">
                 <h3><i class="fa fa-spinner fa-spin"></i> Cargando <span class="inverso">| Loading ...</span></h3>
-            </center>
+            </div>
         </div>
         <div class="seccionAngular" ng-controller="Instituciones">
-            {% include Instituciones:lista.html.twig::class %}
+            {% include 'instituciones/lista.html.twig' %}
         </div>
     </div>
 {% endblock content %}
@@ -29,18 +29,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script>
         var institucionesREST = "{{ institucionesREST }}";
-    </script> 
-    {# AngularJS #}
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular/angular.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-sanitize/angular-sanitize.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-resource/angular-resource.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
-    {# Aplicación del Blog #} 
-    <script src="{{ asset('js/funciones_aux.js') }}"></script>
-    <script src="{{ asset('js/institucionesApp/institucionesControllers.js') }}"></script>
-    <script src="{{ asset('js/institucionesApp/institucionesApp.js') }}"></script>
+    </script>
+    {% block importmap %}{{ importmap('angular_app') }}{% endblock %}
 {% endblock %}

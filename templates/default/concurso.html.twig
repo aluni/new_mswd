@@ -1,15 +1,15 @@
 {% extends "base.html.twig" %}
 {% block navigation %}
-    {% include Nav:menu-simple.html.twig::class %}
+    {% include 'nav/menu-simple.html.twig'%}
 {% endblock %}
 {% block content %}
     <section id="concurso" class="container">
         <h2>Participa en el Concurso de Fotografía y Vídeo<span class="inverso"> | Participate in the Photo & Video Contest</span>:</h2>
         <div class="block">
             <div class="col-md-6 col-md-offset-3">
-                <center>
+                <div style="text-align: center;">
                     <iframe src="http://pcdn.easypromosapp.com/widget/37080?ep1=widget&ep2=embed" width="700px" height="1200px" frameborder="0"></iframe>
-                </center>
+                </div>
             </div>
         </div>
     </section>

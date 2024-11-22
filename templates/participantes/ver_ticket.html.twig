@@ -26,10 +26,10 @@
                 </div>
             </div>
             <div class="centro">
-                <center>
+                <div style="text-align: center;">
                     {{ participante.nombre ~ ' ' ~ participante.apellidos }}<br/>
                     {{ participante.email }}
-                </center>
+                </div>
             </div>
             <div class="contenedorQr">
                 <img src="{{ qrcode_url(url('comprobarParticipante', {'id': participante.id})) }}" />

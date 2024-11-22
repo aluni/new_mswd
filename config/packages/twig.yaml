@@ -5,6 +5,10 @@ twig:
         urls:
             portal: "%urls.portal%"
         tamanoPag: "%tamanoPag%"
+        twitter_url: 'https://twitter.com/mswdmadrid'
+        facebook_url: 'https://www.facebook.com/madridstudentwelcomeday'
+        youtube_url: 'https://www.youtube.com/channel/UCBiI2LdDJUOWRqFoY4dIrkw/videos'
+        google_plus_url: 'https://plus.google.com/115523011426386467941/'
 
 when@test:
     twig:

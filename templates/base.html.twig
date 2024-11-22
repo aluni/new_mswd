@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Acto de bienvenida oficial de la ciudad Madrid a todos los estudiantes - MSWD">
         <meta name="author" content="MSWD">
-        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         {% block stylesheets %}
         {% endblock %}
         {% block custom_stylesheets %}
@@ -19,11 +19,11 @@
     <body id="body" data-spy="scroll" class="demo-lightbox-gallery">
         <header>
             {% block navigation %}
-                {% include Nav:menu-estudiantes.html.twig::class %}
+                {% include 'nav/menu-estudiantes.html.twig' %}
             {% endblock %}
         </header>
         <main id="content" class="pag-estud">
-            {% include :mensajes.html.twig::class %}
+            {% include 'mensajes.html.twig' %}
             {% block content %}
             {% endblock %}
         </main>
@@ -36,7 +36,7 @@
             </div>
         {% endif %}
         {% block footer %}
-            {% include "footer:footer.html.twig" %}
+            {% include "footer/footer.html.twig" %}
         {% endblock %}
     </body>
 </html>

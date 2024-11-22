@@ -1,19 +1,19 @@
 {% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include Nav:menu-simple.html.twig::class %}
+    {% include 'nav/menu-simple.html.twig'%}
 {% endblock %}
 
 {% block content %}
     <div ng-app="aluniBlogApp" class="container last">
         <div id="mensajeEspera" class="row">
-            <center>
+            <div style="text-align: center;">
                 <h3><i class="fa fa-spinner fa-spin"></i> Cargando <span class="inverso">| Loading ...</span></h3>
-            </center>
+            </div>
         </div>
         <div id="listadoAngular" ng-controller="Blog">
-            {% include Blog:listadoEntradas/col_categorias.html.twig::class %}
-            {% include Blog:listadoEntradas/col_entradas.html.twig::class %}
+            {% include 'blog/listadoEntradas/col_categorias.html.twig'%}
+            {% include 'blog/listadoEntradas/col_entradas.html.twig'%}
         </div>
     </div>
 {% endblock content %}
@@ -23,19 +23,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script>
         var entradasREST = "{{ urlEntradas }}";
     </script>
-    {# AngularJS #}
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular/angular.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-sanitize/angular-sanitize.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-resource/angular-resource.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
-    {# Aplicación del Blog #} 
-    <script src="{{ asset('js/funciones_aux.js') }}"></script>
-    <script src="{{ asset('js/blogApp/blogFilters.js') }}"></script>
-    <script src="{{ asset('js/blogApp/blogControllers.js') }}"></script>
-    <script src="{{ asset('js/blogApp/blogApp.js') }}"></script>
+    {% block importmap %}{{ importmap('angular_app') }}{% endblock %}
 {% endblock %}

@@ -1,0 +1,108 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+}.flaticon-bed33:before {
+	content: "\e000";
+}
+.flaticon-beer13:before {
+	content: "\e001";
+}
+.flaticon-branding:before {
+	content: "\e002";
+}
+.flaticon-business133:before {
+	content: "\e003";
+}
+.flaticon-cinema24:before {
+	content: "\e004";
+}
+.flaticon-class11:before {
+	content: "\e005";
+}
+.flaticon-copy32:before {
+	content: "\e006";
+}
+.flaticon-delivery52:before {
+	content: "\e007";
+}
+.flaticon-film50:before {
+	content: "\e008";
+}
+.flaticon-giraffe9:before {
+	content: "\e009";
+}
+.flaticon-green6:before {
+	content: "\e00a";
+}
+.flaticon-hairdresser5:before {
+	content: "\e00b";
+}
+.flaticon-healthyfood5:before {
+	content: "\e00c";
+}
+.flaticon-help20:before {
+	content: "\e00d";
+}
+.flaticon-instrument7:before {
+	content: "\e00e";
+}
+.flaticon-madrid:before {
+	content: "\e00f";
+}
+.flaticon-man204:before {
+	content: "\e010";
+}
+.flaticon-man244:before {
+	content: "\e011";
+}
+.flaticon-mannequin2:before {
+	content: "\e012";
+}
+.flaticon-map29:before {
+	content: "\e013";
+}
+.flaticon-mountain24:before {
+	content: "\e014";
+}
+.flaticon-mountain6:before {
+	content: "\e015";
+}
+.flaticon-museum37:before {
+	content: "\e016";
+}
+.flaticon-patient1:before {
+	content: "\e017";
+}
+.flaticon-phone136:before {
+	content: "\e018";
+}
+.flaticon-school3:before {
+	content: "\e019";
+}
+.flaticon-segovia:before {
+	content: "\e01a";
+}
+.flaticon-shelf1:before {
+	content: "\e01b";
+}
+.flaticon-student1:before {
+	content: "\e01c";
+}
+.flaticon-traffic17:before {
+	content: "\e01d";
+}
+.flaticon-upper20:before {
+	content: "\e01e";
+}

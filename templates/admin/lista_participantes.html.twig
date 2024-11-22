@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include Nav:menu-simple.html.twig::class %}
+    {% include 'nav/menu-simple.html.twig' %}
 {% endblock %}
 
-{% form_theme formFiltrosParticipante Form:fields.html.twig::class %}
-{% form_theme formSorteo Form:fields.html.twig::class %}
+{% form_theme formFiltrosParticipante form:fields.html.twig %}
+{% form_theme formSorteo form:fields.html.twig %}
 
 {% block content %}
     <div ng-app="participantesApp" class="container-fluid last margin-top-20">
@@ -17,21 +17,21 @@
         <div class="seccionAngular" ng-controller="Participantes" style="display: none">
             {% if is_granted('ROLE_ADMIN') %}
                 <h3>Lanzar Sorteo</h3>
-                {% include Admin:Sorteos/formularioSorteo.html.twig::class %}
-                {% include Admin:Sorteos/ganadores.html.twig::class %}
+                {% include 'admin/Sorteos/formularioSorteo.html.twig' %}
+                {% include 'admin/Sorteos/ganadores.html.twig' %}
                 <br>
             {% endif %}
             <h3>Lista de Registrados{% if is_granted('ROLE_INSTITUCION') %} en {{ app.user.nombre }} - (<a target="_blank" href="https://docs.google.com/document/d/1rWzfIElksmhhYZLtHQivkk5ROaaQU7K2uBckMMMRKTY/edit?usp=sharing">ayuda</a>){% endif %}</h3>
             {% if is_granted('ROLE_INSTITUCION') %}
-                {% include Admin:ListaParticipantes/formularioCheckear.html.twig::class %}
+                {% include 'admin/ListaParticipantes/formularioCheckear.html.twig' %}
                 <h4>¡[[ participantes.length ]] participantes checkeados!</h4>
             {% endif %}
-            {% include Admin:ListaParticipantes/mensajes.html.twig::class %}
-            {% include Admin:ListaParticipantes/filtro.html.twig::class %}
-            {% include Admin:ListaParticipantes/lista.html.twig::class %}
+            {% include 'admin/ListaParticipantes/mensajes.html.twig'%}
+            {% include 'admin/ListaParticipantes/filtro.html.twig'%}
+            {% include 'admin/ListaParticipantes/lista.html.twig'%}
             {% if is_granted('ROLE_EMPLEADO') %}
                 <div class="block">
-                    {% include Default:formularioInscripcion.html.twig::class %}
+                    {% include 'default/formulario_inscripcion.html.twig'%}
                 </div>
             {% endif %}
         </div>

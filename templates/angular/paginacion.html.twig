@@ -1,6 +1,6 @@
 <section class="row">
     <div class="col-xs-12">
         <pagination ng-hide="numPags() <= 1" id="paginacion" total-items="filtradoLong" onclick="scrollToTop()" ng-model="pagActual" max-size="15" boundary-links="true" rotate="false" items-per-page="tamanoPag" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-        <p>[[ pagActual ]] / [[ numPags()]] {{ 'paginas'|trans }} ([[filtradoLong]] {{ 'resultados'|trans }})</p>
+        <p>[[ pagActual ]] / [[ numPags()]] páginas ([[filtradoLong]] resultados)</p>
     </div>
 </section>

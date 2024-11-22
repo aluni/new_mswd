@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include Nav:menu-instituciones.html.twig::class %}
+    {% include 'nav/menu-instituciones.html.twig' %}
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,7 @@
                         <iframe class="marco-video img-responsive" width="800" height="600" src="https://www.youtube.com/embed/3fvxWasz-qE" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
-                {% include Default:albumes.html.twig::class %}
+                {% include 'default/albumes.html.twig'%}
             </div>
         </div>
         <div id="datos" class="parallax-counter parallaxBg">
@@ -144,63 +144,7 @@
         <div>
             <img class="img-responsive" src="{{ asset('img/header7.jpg') }}" alt="">
         </div>
-        {#
-        <div id="patrocinadores" class="container content-sm">
-            <div class="title-v1">
-                <h2>Quien patrocina el evento</h2>
-            </div>
-            <div class="row margin-bottom-20">
-                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.014media.com/sociedades/unicampus/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-unicampus.png') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-xs-12">
-                    <h4>Organización y promoción del MSWD.</h4>
-                </div>
-            </div>
-            <div class="row margin-bottom-20">
-                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.universia.es/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-universia.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-xs-12">
-                    <h4>Promoción del MSWD.</h4>
-                </div>
-            </div>
-            <div class="row margin-bottom-20">
-                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.aluni.net" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-aluni.png') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-xs-12">
-                    <h4>Empresa fundadora del MSWD.</h4>
-                </div>
-            </div>
-            <div class="row margin-bottom-20">
-                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.madrid.es/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-aytoMadrid.png') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-xs-12">
-                    <h4>Patrocinado por “Madrid Destino Cultura, Turismo y Negocio”.</h4>
-                </div>
-            </div>
-            {#<div class="row margin-bottom-20">
-                <div class="col-sm-5 col-xs-8 col-sm-offset-0 col-xs-offset-2">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <a href="http://www.madrid.org/" target="_blank"><img class="img-responsive" src="{{ asset('img/logo-comMadrid.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-xs-12">
-                    <h4>La Comunidad Autónoma de Madrid, a través de la Dirección General de Turismo.</h4>
-                </div>
-            </div>
-        </div>
-        #}
+
         <div class="bg-grey">
             <div id="difusion" class="container content-sm">
                 <div class="title-v1">
@@ -228,11 +172,6 @@
                                 <h4>Las autoridades académicas de las instituciones educativas invitarán -habitualmente por email- a todos los estudiantes, animándoles a participar en el evento. </h4>
                             </div>
                         </div>
-                        {# <div class="clearfix margin-bottom-30">
-                             <div class="content-boxes-in-v3">
-                                 <h4>Durante los quince días previos al evento habrá en las entradas de las diversas Escuelas y Facultades stands informativos del Welcome Day.</h4>
-                             </div>
-                         </div>#}
                         <div class="clearfix margin-bottom-30">
                             <div class="content-boxes-in-v3">
                                 <h4>Desde las redes sociales se dará la máxima difusión al evento.</h4>
@@ -277,7 +216,7 @@
             </div>
         </div>
         <section class="container">
-            {% include Default:organizadores.html.twig::class %}
+            {% include 'default/organizadores.html.twig'%}
         </section>
         <div class="contacts-section margin-top-20 last">
             <div id="contacta" class="container content-sm">
@@ -340,7 +279,6 @@
                     $('#enviarEmailContactar').html('Enviar');
                 });
             }
-            ;
         </script>
     {% endblock %}
 

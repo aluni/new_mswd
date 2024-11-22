@@ -1,26 +1,26 @@
 {% extends "base.html.twig" %}
 
 {% block navigation %}
-    {% include Nav:menu-simple.html.twig::class %}
+    {% include 'nav/menu-simple.html.twig'%}
 {% endblock %}
 
-{% form_theme formFiltrosParticipante Form:fields.html.twig::class %}
-{% form_theme formSorteo Form:fields.html.twig::class %}
+{% form_theme formFiltrosParticipante form:fields.html.twig %}
+{% form_theme formSorteo form:fields.html.twig %}
 
 {% block content %}
     <div ng-app="participantesApp" class="container-fluid last">
         <h2>Sorteos</h2>
         <div id="mensajeEspera" class="row">
-            <center>
+            <div style="text-align: center;">
                 <h3><i class="fa fa-spinner fa-spin"></i> Cargando <span class="inverso">| Loading ...</span></h3>
-            </center>
+            </div>
         </div>
         <div class="seccionAngular" ng-controller="Participantes" style="display: none">
-            {% include Admin:Sorteos/formularioSorteo.html.twig::class %}
+            {% include 'admin/Sorteos/formularioSorteo.html.twig'%}
             <h2>Lista de participantes</h2>
-            {% include Admin:ListaParticipantes/filtro.html.twig::class %}
-            {% include Admin:ListaParticipantes/lista.html.twig::class %}
-            {% include Admin:Sorteos/ganadores.html.twig::class %}
+            {% include 'admin/ListaParticipantes/filtro.html.twig'%}
+            {% include 'admin/ListaParticipantes/lista.html.twig'%}
+            {% include 'admin/Sorteos/ganadores.html.twig'%}
         </div>
     </div>
 {% endblock content %}
@@ -30,19 +30,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script>
         var participantesREST = "{{ participantesREST }}";
-    </script> 
-    {# AngularJS #}
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular/angular.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-sanitize/angular-sanitize.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-resource/angular-resource.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-route/angular-route.min.js') }}"></script>
-    <script src="{{ asset('bundles/swdmadrid/vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
-    {# Aplicación del Blog #} 
-    <script src="{{ asset('js/funciones_aux.js') }}"></script>
-    <script src="{{ asset('js/participantesApp/participantesControllers.js') }}"></script>
-    <script src="{{ asset('js/participantesApp/participantesFilters.js') }}"></script>
-    <script src="{{ asset('js/participantesApp/participantesApp.js') }}"></script>
+    </script>
+    {% block importmap %}{{ importmap('angular_app') }}{% endblock %}
 {% endblock %}
