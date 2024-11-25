@@ -8,6 +8,8 @@ import './my_vendor/js/angular-resource/angular-resource.min.js';
 import './my_vendor/js/angular-route/angular-route.min.js';
 import './my_vendor/js/angular-bootstrap/ui-bootstrap-tpls.min.js';
 
+import './js/funcionesAngular_aux.js';
+
 //Aplicación del Blog
 import './js/blogApp/blogFilters.js';
 import './js/blogApp/blogControllers.js';

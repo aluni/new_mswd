@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Checkeo
  *
- * @ORM\Table()
+ * @ORM\Table(name="Checkeo")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */

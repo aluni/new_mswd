@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Sorteo
  *
- * @ORM\Table()
+ * @ORM\Table(name="Sorteo")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */

@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
- * @ORM\Table()
+ * @ORM\Table(name="Usuario")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="tipo", type="string")
  * @ORM\DiscriminatorMap({"usuario" = "Usuario", "participante" = "Participante", "institucion" = "Institucion"})

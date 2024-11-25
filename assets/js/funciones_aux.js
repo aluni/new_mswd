@@ -24,11 +24,6 @@ function variableVacia(variable) {
     return (typeof (variable) === 'undefined' || variable === null || variable === '' || variable.length === 0);
 }
 
-angular.module('configuracion', ['ngRoute', 'ngSanitize', 'ngResource', 'ui.bootstrap'])
-    .config(function ($interpolateProvider) {
-        $interpolateProvider.startSymbol('[[').endSymbol(']]');
-    });
-
 $('select').change(function () {
     if (variableVacia($(this).val())) {
         $(this).css('color', '#999');
@@ -70,15 +65,8 @@ function getRandomInt(min, max) {
     let randomNumber = randomBuffer[0] / (0xffffffff + 1);
     return Math.floor(randomNumber * (max - min + 1)) + min;
 }
-
 actualizarSelects();
-jQuery(document).ready(function () {
-    App.init();
-    App.initCounter();
-    App.initParallaxBg();
-    OwlCarousel.initOwlCarousel();
-    RevolutionSlider.initRSfullScreen();
-});
+
 function scrollToTop() {
     $('body,html').animate({
         scrollTop: 0

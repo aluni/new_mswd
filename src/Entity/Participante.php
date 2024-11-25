@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Participante
  *
- * @ORM\Table()
+ * @ORM\Table(name="Participante")
  * @ORM\Entity
  */
 class Participante extends Usuario {
