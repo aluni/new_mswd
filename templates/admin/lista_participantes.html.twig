@@ -4,8 +4,8 @@
     {% include 'nav/menu-simple.html.twig' %}
 {% endblock %}
 
-{% form_theme formFiltrosParticipante form:fields.html.twig %}
-{% form_theme formSorteo form:fields.html.twig %}
+{% form_theme formFiltrosParticipante 'form/fields.html.twig' %}
+{% form_theme formSorteo 'form/fields.html.twig' %}
 
 {% block content %}
     <div ng-app="participantesApp" class="container-fluid last margin-top-20">

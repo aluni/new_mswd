@@ -104,7 +104,7 @@ class ParticipantesController extends AluniController {
 
     /**
      * @Route("/info-participante", name="infoParticipante")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      * @Template
      */
     public function infoParticipanteAction(): RedirectResponse|array {
@@ -112,8 +112,12 @@ class ParticipantesController extends AluniController {
             return $this->redirect($this->generateUrl('lista-participantes'));
         }
         $participante = $this->getUser();
-        $random = substr($participante->getEmail(), 1, 2);
-        $urlTicket = 'tickets/' . $random . $participante->getNumeroEntrada() . '.pdf';
+        if ($participante instanceof Participante) {
+            $random = substr($participante->getEmail(), 1, 2);
+            $urlTicket = 'tickets/' . $random . $participante->getNumeroEntrada() . '.pdf';
+        } else {
+            $urlTicket = '';
+        }
         return ['participante' => $participante, 'urlTicket' => $urlTicket];
     }
 

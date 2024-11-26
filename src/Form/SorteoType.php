@@ -28,7 +28,7 @@ class SorteoType extends AbstractType {
                     'attr' => ['ng-model' => 'sorteo.cantidad']])
                 ->add('condicion', ChoiceType::class, [
                     'label' => 'Condición para participar',
-                    'empty_value' => 'Condición para participar',
+                    'placeholder' => 'Condición para participar',
                     'choices' => ['entrada' => 'Entrar al evento',
                         'min_checkeos' => 'Visitar al menos 5 stands',
                         'exclusivo' => 'Visitar el stand de la institucion'],

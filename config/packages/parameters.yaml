@@ -9,3 +9,14 @@ parameters:
     dirs.uploads: /home/ozram/Sitios/contabilidad/web/
     locale: es
     tamanoPag: 20
+    twitter_url: 'https://twitter.com/mswdmadrid'
+    facebook_url: 'https://www.facebook.com/madridstudentwelcomeday'
+    youtube_url: 'https://www.youtube.com/channel/UCBiI2LdDJUOWRqFoY4dIrkw/videos'
+    google_plus_url: 'https://plus.google.com/115523011426386467941/'
+    blogId: 1915779507309280418
+    googleAPIkeyServer: AIzaSyBthBW3kd71Zr7ksgOydB2zB2guqXzk1vc
+    googleAPIkeyBrowser: AIzaSyBSIFrfbjoE8713aTwd5WyeWjWejfsicio
+    directorioEntradasBlogs: /var/www/mswd/web/noticias
+    dirGoogle: '/home/anima/Sites/mswd/app/config/google'
+    urlEntradasBlogs: 'http://newmswd.net/noticias'
+    urlLogos: 'http://newmswd.net/logos'

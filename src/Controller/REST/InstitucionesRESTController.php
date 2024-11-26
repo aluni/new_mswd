@@ -19,7 +19,7 @@ class InstitucionesRESTController extends AluniRESTController {
     /**
      * @Rest\View(serializerGroups={"lista-instituciones"})
      * @Rest\Get("/instituciones", name="get_instituciones")
-     * @Security("has_role('ROLE_PARTICIPANTE') || has_role('ROLE_EMPLEADO')")
+     * @Security("is_granted('ROLE_PARTICIPANTE') || is_granted('ROLE_EMPLEADO')")
      * @return array|Institucion[]|object[]
      */
     public function getInstitucionesAction(): array {

@@ -21,7 +21,7 @@ class SorteosRESTController extends AluniRESTController {
     /**
      * @Rest\View(serializerGroups={"lista-sorteos"})
      * @Rest\Get("/sorteos", name="get_sorteos")
-     * @Security("has_role('ROLE_INSTITUCION') || has_role('ROLE_EMPLEADO')")
+     * @Security("is_granted('ROLE_INSTITUCION') || is_granted('ROLE_EMPLEADO')")
      * @return array|object[]|Sorteo[]
      */
     public function getSorteosAction(): array {

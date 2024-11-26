@@ -21,7 +21,7 @@ class ParticipantesRESTController extends AluniRESTController {
     /**
      * @Rest\View(serializerGroups={"lista-participantes"})
      * @Rest\Get("/participantes", name="get_participantes")
-     * @Security("has_role('ROLE_INSTITUCION') || has_role('ROLE_EMPLEADO')")
+     * @Security("is_granted('ROLE_INSTITUCION') || is_granted('ROLE_EMPLEADO')")
      * @param Request $request
      * @return array|object[]|Participante[]
      */

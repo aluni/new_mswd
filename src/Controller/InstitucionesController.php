@@ -95,7 +95,7 @@ class InstitucionesController extends AluniController {
     }
 
     /**
-     * @Security("has_role('ROLE_INSTITUCION')")
+     * @Security("is_granted('ROLE_INSTITUCION')")
      * @Route("/checkear-participante/{email}", name="checkearParticipante",  defaults={"email"=""})
      */
     public function checkearParticipanteAction($email): Response {
@@ -120,7 +120,7 @@ class InstitucionesController extends AluniController {
     }
 
     /**
-     * @Security("has_role('ROLE_INSTITUCION')")
+     * @Security("is_granted('ROLE_INSTITUCION')")
      * @Route("/descargar-checkeados", name="descargarCheckeados")
      */
     #[NoReturn] public function descargarCheckeadosAction(): void {

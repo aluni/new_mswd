@@ -24,7 +24,7 @@ class AdminController extends AluniController {
     /**
      * @return array
      * @Route("/lista-participantes", name="lista-participantes")
-     * @Security("has_role('ROLE_INSTITUCION') || has_role('ROLE_EMPLEADO')")
+     * @Security("is_granted('ROLE_INSTITUCION') || is_granted('ROLE_EMPLEADO')")
      * @Template
      * @throws Exception
      */
@@ -48,7 +48,7 @@ class AdminController extends AluniController {
     /**
      * @return array
      * @Route("/sorteos", name="sorteos")
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Template
      * @throws Exception
      */
@@ -70,7 +70,7 @@ class AdminController extends AluniController {
 
     /**
      * @Route("/participantes/{id}", requirements={"_format"="json"}, methods={"PUT"})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function updateParticipanteAction(Request $request, $id): JsonResponse {
         $participante = $this->doctrine->getRepository(Participante::class)->find($id);

@@ -5,8 +5,10 @@ security:
             algorithm: bcrypt
 
     role_hierarchy:
-        ROLE_GESTOR:    ROLE_USER
-        ROLE_ADMIN:     ROLE_GESTOR
+        ROLE_EMPRESA: ROLE_USER
+        ROLE_PARTICIPANTE: ROLE_USER
+        ROLE_EMPLEADO: ROLE_USER
+        ROLE_ADMIN: ROLE_EMPLEADO
 
     providers:
         fos_userbundle:
@@ -33,9 +35,7 @@ security:
         - { path: ^/login$, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/resetting, roles: PUBLIC_ACCESS }
-        - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/api/, roles: ROLE_GESTOR }
-        - { path: ^/.*, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/, role: ROLE_ADMIN }
 
 #    firewalls:
 #        main:

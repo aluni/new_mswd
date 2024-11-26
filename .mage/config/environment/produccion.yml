@@ -11,6 +11,9 @@ deployment:
         - tests
         - .git
         - .mage
+        - public/tickets
+        - public/noticias
+        - public/logos
         # Archivos
         - phpunit.xml.dist
         - yarn*

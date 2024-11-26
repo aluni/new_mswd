@@ -37,7 +37,7 @@ class ParticipanteFiltrosType extends AbstractType {
                     'attr' => ['ng-model' => 'filtro.sorteo']])
                 ->add('premiado', ChoiceType::class, [
                     'label' => 'Premiado',
-                    'empty_value' => 'Premiado',
+                    'placeholder' => 'Premiado',
                     'required' => false,
                     'choices' => [
                         '1' => 'Sí',
@@ -58,7 +58,7 @@ class ParticipanteFiltrosType extends AbstractType {
                 ->add('sexo', ChoiceType::class, [
                     'label' => 'Género',
                     'required' => false,
-                    'empty_value' => 'Género',
+                    'placeholder' => 'Género',
                     'choices' => [
                         '1' => 'Hombre',
                         '0' => 'Mujer'],
@@ -66,7 +66,7 @@ class ParticipanteFiltrosType extends AbstractType {
                 ->add('validado', ChoiceType::class, [
                     'label' => '¿Validado?',
                     'required' => false,
-                    'empty_value' => 'Validado',
+                    'placeholder' => 'Validado',
                     'choices' => [
                         'true' => 'Sí',
                         'false' => 'No'],
@@ -74,7 +74,7 @@ class ParticipanteFiltrosType extends AbstractType {
                 ->add('asistido', ChoiceType::class, [
                     'label' => '¿Asistido?',
                     'required' => false,
-                    'empty_value' => '¿Asistido?',
+                    'placeholder' => '¿Asistido?',
                     'choices' => [
                         'true' => 'Sí',
                         'false' => 'No'],
@@ -82,7 +82,7 @@ class ParticipanteFiltrosType extends AbstractType {
                 ->add('pais', ChoiceType::class, [
                     'label' => 'País',
                     'required' => false,
-                    'empty_value' => 'País',
+                    'placeholder' => 'País',
                     'choices' => $options['paises'],
                     'attr' => ['ng-model' => 'filtro.nacionalidad']])
                 ->add('institucion', EntityType::class, [
