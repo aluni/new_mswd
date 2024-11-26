@@ -16,7 +16,7 @@ class GoogleServicesManager {
 
     protected string $dir;
 
-    public function __construct(#[Autowire('%kernel.project_dir%/app/config/google')] string $googleDir) {
+    public function __construct(#[Autowire('%kernel.project_dir%/config/google')] string $googleDir) {
         $this->dir = $googleDir;
     }
 

@@ -1,0 +1,46 @@
+#integracion
+deployment:
+    user: root
+    from: ./
+    to: /var/www/html/aluni
+    excludes:
+        - nbproject
+        - Symfaluni.code-workspace
+        - .mage
+        - .git
+        - .gitignore
+        - tests
+        - node_modules
+        - webpack.config.js
+        - assets
+        - composer.json
+        - composer.lock
+        - package.json
+        - yarn-error.log
+        - yarn.lock
+        - docs
+        - LICENSE
+        - README.md
+        - phpunit.xml.dist
+        - .env.test
+        # Descomentar después del primer uso
+        - var/cache
+        - var/log
+        - public/uploads
+        - config/packages/parameters.yaml
+        - .env
+        - config/google/credenciales
+        - translations/manual*
+        - translations/instrucciones*
+        - translations/home*
+        - translations/contrato*
+        - translations/sobre*
+hosts:
+    - integracion.aluni.net
+tasks:
+    pre-deploy:
+        - dump-assets
+    on-deploy:
+    post-deploy:
+        - clear-cache-remote
+        - dump-dev-assets

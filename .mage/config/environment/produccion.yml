@@ -1,0 +1,32 @@
+#integracion
+deployment:
+    user: root
+    from: ./
+    to: /var/www/new_mswd
+    excludes:
+        # Carpetas
+        - ./assets
+        - nbproject
+        - node_modules
+        - tests
+        - .git
+        - .mage
+        # Archivos
+        - phpunit.xml.dist
+        - yarn*
+        - .env.test
+        - .gitignore
+        # Descomentar después del primer uso
+        - config/packages/parameters.yaml
+        - .env
+        - var/cache
+        - var/log
+hosts:
+    - produccion
+tasks:
+    pre-deploy:
+        - dump-assets
+    on-deploy:
+    post-deploy:
+        - clear-cache-remote
+        - dump-dev-assets

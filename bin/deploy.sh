@@ -1,0 +1,1 @@
+./vendor/bin/mage deploy to:produccion

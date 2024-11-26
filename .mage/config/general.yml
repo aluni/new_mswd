@@ -1,0 +1,7 @@
+# global settings
+name: aluni
+email: sistemas@aluni.net
+notifications: false
+logging: true
+maxlogs: 30
+ssh_needs_tty: false
