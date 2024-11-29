@@ -2,7 +2,7 @@
 deployment:
     user: root
     from: ./
-    to: /var/www/new_mswd
+    to: /var/www/mswd
     excludes:
         # Carpetas
         - ./assets
@@ -25,7 +25,7 @@ deployment:
         - var/cache
         - var/log
 hosts:
-    - produccion
+    - new_produccion
 tasks:
     pre-deploy:
         - dump-assets
